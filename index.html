@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Novo Projeto</title>
-
-    <style>
+    <title>Consulta de Patrimônio</title> <style>
         /* --- ESTILOS GERAIS --- */
         body {
             margin: 0;
@@ -23,66 +21,13 @@
         /* --- ESTILOS DO CONTEÚDO PRINCIPAL --- */
         .main-content {
             padding: 40px 20px;
+            text-align: center; /* Centraliza o conteúdo de boas-vindas */
+            color: #555; /* Cor para o texto de boas-vindas */
         }
 
-        /* --- ESTILOS DA TABELA (Mantidos) --- */
-        .data-table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            color: #333;
-        }
-
-        .data-table th,
-        .data-table td {
-            border: 1px solid #dee2e6;
-            padding: 12px 15px;
-            text-align: center;
-        }
-
-        .data-table thead th {
-            background-color: #343a40;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .data-table thead tr:last-child th {
-            background-color: #495057;
-        }
-
-        .data-table tbody tr {
-            background-color: #ffffff;
-        }
-
-        .data-table tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .data-table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        .data-table tbody td:first-child {
-            font-weight: bold;
-            text-align: left;
-            color: #0056b3;
-        }
-
-        .data-table tfoot {
-            font-weight: bold;
-        }
-
-        .data-table tfoot tr {
-            background-color: #dee2e6;
-        }
-
-        .grand-total {
-            background-color: #0056b3;
-            color: #ffffff;
-            font-size: 1.2em;
+        .main-content h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
         /* --- ESTILOS DA PESQUISA (Mantidos) --- */
@@ -214,9 +159,8 @@
     </div>
 
     <main class="main-content">
-        <table class="data-table">
-            <thead><tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr><tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr></thead><tbody><tr><td>SEDES</td><td>129</td><td>125</td><td>131</td><td>254</td></tr><tr><td>SESAU</td><td>433</td><td>20</td><td>428</td><td>453</td></tr><tr><td>SEFAZ</td><td>41</td><td>4</td><td>41</td><td>45</td></tr><tr><td>SEDUC</td><td>463</td><td>93</td><td>463</td><td>556</td></tr><tr><td>SEO</td><td>34</td><td>6</td><td>35</td><td>40</td></tr><tr><td>SAJUR</td><td>39</td><td>12</td><td>39</td><td>51</td></tr><tr><td>SECAD</td><td>98</td><td>2</td><td>99</td><td>100</td></tr><tr><td>SEGUR</td><td>117</td><td>6</td><td>119</td><td>123</td></tr><tr><td>SETUR</td><td>28</td><td>2</td><td>28</td><td>30</td></tr><tr><td>SESEP</td><td>39</td><td>1</td><td>38</td><td>40</td></tr><tr><td>SEMAM</td><td>44</td><td>5</td><td>44</td><td>49</td></tr><tr><td>SEURB</td><td>52</td><td>6</td><td>52</td><td>58</td></tr><tr><td>SEPEDI</td><td>26</td><td>3</td><td>28</td><td>29</td></tr><tr><td>SEESP</td><td>22</td><td>8</td><td>22</td><td>30</td></tr><tr><td>SEGOV</td><td>72</td><td>4</td><td>65</td><td>76</td></tr><tr><td>SEPLAN</td><td>39</td><td>8</td><td>46</td><td>47</td></tr><tr><td>SEHAB</td><td>30</td><td>4</td><td>30</td><td>34</td></tr></tbody><tfoot><tr><td>TOTALIZAÇÃO</td><td>1.706</td><td>309</td><td>1.708</td><td class="grand-total">2015</td></tr></tfoot>
-        </table>
+        <h2>Sistema de Consulta</h2>
+        <p>Utilize a barra de pesquisa acima para encontrar um equipamento pelo seu número de patrimônio.</p>
     </main>
 
     <footer>
@@ -245,7 +189,6 @@
 
         async function fetchSheetData() {
             try {
-                // Adicionamos um parâmetro para evitar cache, garantindo dados sempre atualizados
                 const response = await fetch(`${sheetUrl}&t=${new Date().getTime()}`);
                 const csvText = await response.text();
                 equipmentData = parseCSV(csvText);
@@ -283,8 +226,6 @@
             const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
 
             if (result) {
-                // ===== CÓDIGO CORRIGIDO AQUI =====
-                // Agora usamos os nomes corretos das colunas: 'EQUIPAMENTO' e 'SECRETARIA'
                 popupTitle.textContent = "Equipamento Encontrado!";
                 popupMessage.innerHTML = `
                     <p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO']}</p>
