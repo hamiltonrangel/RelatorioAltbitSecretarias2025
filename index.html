@@ -1,18 +1,176 @@
-<!DOCTYPE html> <html lang="pt-br"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Meu Novo Projeto</title> <style> /* Inicia um bloco de estilo CSS para adicionar design à página. */
-        body { /* Seleciona o elemento <body> para aplicar estilos. */
-            margin: 0; /* Remove a margem padrão do corpo da página para que o cabeçalho e o rodapé toquem as bordas. */
-            font-family: sans-serif; /* Define uma fonte padrão para o texto da página, caso haja algum. */
-        }
-        img { /* Seleciona todas as imagens (tags <img>) na página. */
-            max-width: 100%; /* Garante que as imagens nunca fiquem mais largas que a tela ou o contêiner onde estão. */
-            display: block; /* Faz com que a imagem se comporte como um bloco, o que ajuda a remover pequenos espaços indesejados abaixo dela. */
-        }
-        .main-content { /* Seleciona o elemento que tem a classe "main-content". */
-            padding: 20px; /* Adiciona um espaçamento interno (20 pixels) para que o conteúdo principal não fique colado nas bordas. */
-            min-height: calc(100vh - 100px - 100px); /* Um cálculo para que o conteúdo principal ocupe a altura da tela menos a altura aproximada do cabeçalho e rodapé. 'vh' é a altura da viewport (tela). */
-            text-align: center; /* Centraliza o texto dentro desta área. */
-        }
-    </style> </head> <body> <header> <img src="images/image2.png" alt="Cabeçalho do site">
-    </header> <main class="main-content"> <h1>Bem-vindo ao Meu Site!</h1> <p>Este é o conteúdo principal da minha página.</p> </main> <footer> <img src="images/image1.png" alt="Rodapé do site">
-    </footer> </body> </html> ```
+<!DOCTYPE html>
+<html lang="pt-br">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Novo Projeto</title>
+
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        body {
+            margin: 0; /* Remove a margem padrão do corpo. */
+            font-family: Arial, sans-serif; /* Define uma fonte mais comum e legível. */
+            background-color: #f4f4f4; /* Adiciona uma cor de fundo suave à página. */
+        }
+
+        img {
+            max-width: 100%; /* Garante que as imagens não ultrapassem a largura do contêiner. */
+            display: block; /* Remove espaços extras indesejados abaixo das imagens. */
+        }
+
+        /* --- ESTILOS DO CONTEÚDO PRINCIPAL --- */
+        .main-content {
+            padding: 20px; /* Adiciona espaçamento interno na área principal. */
+        }
+
+        /* --- ESTILOS DA TABELA --- */
+        .data-table {
+            width: 90%; /* Define a largura da tabela em 90% da área de conteúdo. */
+            margin: 20px auto; /* Centraliza a tabela na horizontal e adiciona margem em cima/baixo. */
+            border-collapse: collapse; /* Une as bordas das células para um visual limpo. */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil para um efeito "flutuante". */
+            font-size: 14px; /* Define um tamanho de fonte base para a tabela. */
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd; /* Adiciona uma borda cinza clara em todas as células. */
+            padding: 12px; /* Adiciona espaçamento interno nas células para não colar o texto nas bordas. */
+            text-align: center; /* Centraliza o texto em todas as células. */
+        }
+
+        /* Estilos específicos para o cabeçalho da tabela */
+        .data-table thead th {
+            font-weight: bold; /* Deixa o texto do cabeçalho em negrito. */
+            color: #333; /* Cor do texto do cabeçalho. */
+        }
+
+        /* Cores de fundo para as células do cabeçalho, imitando a imagem */
+        .header-pink { background-color: #f8d7da; }
+        .header-green { background-color: #d4edda; }
+        .header-yellow { background-color: #fff3cd; }
+
+        /* Estilo para as linhas do corpo da tabela */
+        .data-table tbody tr:nth-child(even) {
+            background-color: #e9f5e9; /* Cor de fundo para as linhas pares (efeito zebrado). */
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #d1e7dd; /* Muda a cor da linha quando o mouse passa por cima. */
+        }
+        
+        .data-table tbody td:first-child {
+            font-weight: bold; /* Deixa o texto da primeira coluna (SEDES, SESAU, etc.) em negrito. */
+            text-align: left; /* Alinha o texto da primeira coluna à esquerda para melhor leitura. */
+        }
+
+        /* Estilos para o rodapé da tabela (Totalização) */
+        .data-table tfoot {
+            font-weight: bold; /* Deixa o texto do rodapé em negrito. */
+            background-color: #d1e7dd; /* Cor de fundo para a linha de totalização. */
+        }
+        
+        .grand-total {
+            background-color: #fec78a; /* Cor de fundo especial para a célula do total geral. */
+            font-size: 1.1em; /* Aumenta um pouco a fonte do total geral para dar destaque. */
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="images/image2.png" alt="Cabeçalho do site">
+    </header>
+
+    <main class="main-content"> <table class="data-table">
+            
+            <thead>
+                <tr>
+                    <th rowspan="2"></th> 
+                    <th colspan="3" class="header-green">INSTALADOS</th> 
+                    <th rowspan="2" class="header-yellow">TOTAL<br>INSTALADOS</th>
+                </tr>
+                <tr>
+                    <th class="header-pink">DESKTOP - MINIPC</th>
+                    <th class="header-green">NOTEBOOK</th>
+                    <th>MONITOR</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td>SEDES</td> <td>129</td> <td>125</td> <td>131</td> <td>254</td>
+                </tr>
+                <tr>
+                    <td>SESAU</td> <td>433</td> <td>20</td> <td>428</td> <td>453</td>
+                </tr>
+                <tr>
+                    <td>SEFAZ</td> <td>41</td> <td>4</td> <td>41</td> <td>45</td>
+                </tr>
+                <tr>
+                    <td>SEDUC</td> <td>463</td> <td>93</td> <td>463</td> <td>556</td>
+                </tr>
+                <tr>
+                    <td>SEO</td> <td>34</td> <td>6</td> <td>35</td> <td>40</td>
+                </tr>
+                <tr>
+                    <td>SAJUR</td> <td>39</td> <td>12</td> <td>39</td> <td>51</td>
+                </tr>
+                <tr>
+                    <td>SECAD</td> <td>98</td> <td>2</td> <td>99</td> <td>100</td>
+                </tr>
+                <tr>
+                    <td>SEGUR</td> <td>117</td> <td>6</td> <td>119</td> <td>123</td>
+                </tr>
+                <tr>
+                    <td>SETUR</td> <td>28</td> <td>2</td> <td>28</td> <td>30</td>
+                </tr>
+                <tr>
+                    <td>SESEP</td> <td>39</td> <td>1</td> <td>38</td> <td>40</td>
+                </tr>
+                <tr>
+                    <td>SEMAM</td> <td>44</td> <td>5</td> <td>44</td> <td>49</td>
+                </tr>
+                <tr>
+                    <td>SEURB</td> <td>52</td> <td>6</td> <td>52</td> <td>58</td>
+                </tr>
+                <tr>
+                    <td>SEPEDI</td> <td>26</td> <td>3</td> <td>28</td> <td>29</td>
+                </tr>
+                <tr>
+                    <td>SEESP</td> <td>22</td> <td>8</td> <td>22</td> <td>30</td>
+                </tr>
+                 <tr>
+                    <td>SEGOV</td> <td>72</td> <td>4</td> <td>65</td> <td>76</td>
+                </tr>
+                 <tr>
+                    <td>SEPLAN</td> <td>39</td> <td>8</td> <td>46</td> <td>47</td>
+                </tr>
+                 <tr>
+                    <td>SEHAB</td> <td>30</td> <td>4</td> <td>30</td> <td>34</td>
+                </tr>
+            </tbody>
+            
+            <tfoot>
+                <tr>
+                    <td>TOTALIZAÇÃO</td>
+                    <td>1.706</td>
+                    <td>309</td>
+                    <td>1.708</td>
+                    <td class="grand-total">2015</td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+    </main>
+
+    <footer>
+        <img src="images/image1.png" alt="Rodapé do site">
+    </footer>
+
+</body>
+
+</html>
