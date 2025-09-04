@@ -12,8 +12,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            /* Garante que o body ocupe a altura mínima para o popup ser centralizado */
-            min-height: 100vh; 
+            min-height: 100vh;
         }
 
         img {
@@ -36,7 +35,8 @@
             color: #333;
         }
 
-        .data-table th, .data-table td {
+        .data-table th,
+        .data-table td {
             border: 1px solid #dee2e6;
             padding: 12px 15px;
             text-align: center;
@@ -48,7 +48,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .data-table thead tr:last-child th {
             background-color: #495057;
         }
@@ -64,7 +64,7 @@
         .data-table tbody tr:hover {
             background-color: #e9ecef;
         }
-        
+
         .data-table tbody td:first-child {
             font-weight: bold;
             text-align: left;
@@ -74,118 +74,130 @@
         .data-table tfoot {
             font-weight: bold;
         }
-        
+
         .data-table tfoot tr {
-             background-color: #dee2e6;
+            background-color: #dee2e6;
         }
-        
+
         .grand-total {
             background-color: #0056b3;
             color: #ffffff;
             font-size: 1.2em;
         }
 
-        /* --- NOVOS ESTILOS PARA A PESQUISA --- */
+        /* --- ESTILOS DA PESQUISA (Mantidos) --- */
         .search-container {
-            text-align: center; /* Centraliza o campo de busca e o botão. */
-            padding: 30px 20px; /* Espaçamento ao redor do contêiner de busca. */
-            background-color: #ffffff; /* Fundo branco para o bloco de busca. */
-            border-bottom: 1px solid #eee; /* Uma linha sutil separando do resto do conteúdo. */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra leve. */
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .search-container input[type="text"] {
-            padding: 12px 15px; /* Espaçamento interno no campo de texto. */
-            width: 300px; /* Largura fixa para o campo de texto. */
-            border: 1px solid #ced4da; /* Borda cinza suave. */
-            border-radius: 5px; /* Bordas arredondadas. */
-            font-size: 16px; /* Tamanho da fonte do texto digitado. */
-            margin-right: 10px; /* Espaçamento à direita do campo de texto. */
-            outline: none; /* Remove a borda azul que aparece ao clicar no campo. */
-            transition: border-color 0.3s ease; /* Transição suave na cor da borda. */
+            padding: 12px 15px;
+            width: 300px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+            outline: none;
+            transition: border-color 0.3s ease;
         }
 
         .search-container input[type="text"]:focus {
-            border-color: #007bff; /* Borda azul ao focar no campo. */
+            border-color: #007bff;
         }
 
         .search-container button {
-            padding: 12px 25px; /* Espaçamento interno do botão. */
-            background-color: #007bff; /* Cor de fundo azul primária para o botão. */
-            color: white; /* Texto branco no botão. */
-            border: none; /* Remove a borda padrão do botão. */
-            border-radius: 5px; /* Bordas arredondadas. */
-            font-size: 16px; /* Tamanho da fonte do botão. */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável. */
-            transition: background-color 0.3s ease; /* Transição suave na cor de fundo. */
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .search-container button:hover {
-            background-color: #0056b3; /* Cor de fundo mais escura ao passar o mouse. */
+            background-color: #0056b3;
         }
 
-        /* --- ESTILOS DO POPUP (inicialmente oculto) --- */
+        /* --- ESTILOS DO POPUP (Mantidos) --- */
         .popup-overlay {
-            display: none; /* Esconde o overlay por padrão. */
-            position: fixed; /* Posição fixa para cobrir a tela inteira. */
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro. */
-            display: flex; /* Usa flexbox para centralizar o conteúdo do popup. */
-            justify-content: center; /* Centraliza horizontalmente. */
-            align-items: center; /* Centraliza verticalmente. */
-            z-index: 1000; /* Garante que o popup fique acima de todo o conteúdo. */
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
 
         .popup-content {
-            background-color: #ffffff; /* Fundo branco para o conteúdo do popup. */
-            padding: 30px; /* Espaçamento interno. */
-            border-radius: 8px; /* Bordas arredondadas. */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra mais forte para o popup. */
-            width: 400px; /* Largura fixa do popup. */
-            max-width: 90%; /* Garante que não ultrapasse a largura da tela em dispositivos menores. */
-            text-align: center; /* Centraliza o texto dentro do popup. */
-            position: relative; /* Necessário para posicionar o botão de fechar. */
-            animation: fadeIn 0.3s ease-out; /* Animação simples de aparecer. */
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 450px;
+            max-width: 90%;
+            text-align: left;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
         }
 
-        /* Animação para o popup */
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .popup-content h3 {
-            margin-top: 0; /* Remove margem superior padrão do título. */
-            color: #333; /* Cor do título. */
-            font-size: 24px; /* Tamanho do título. */
-            margin-bottom: 20px; /* Espaçamento abaixo do título. */
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
         }
-
+        
         .popup-content p {
-            color: #555; /* Cor do texto do resultado. */
-            font-size: 18px; /* Tamanho do texto do resultado. */
-            line-height: 1.6; /* Espaçamento entre as linhas. */
-            margin-bottom: 25px; /* Espaçamento abaixo do parágrafo. */
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 10px;
         }
-
+        
+        .popup-content .not-found {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
         .popup-close-btn {
-            position: absolute; /* Posição absoluta para o botão de fechar. */
+            position: absolute;
             top: 10px;
             right: 15px;
-            font-size: 28px; /* Tamanho do 'X'. */
+            font-size: 28px;
             cursor: pointer;
             color: #aaa;
             background: none;
             border: none;
-            line-height: 1; /* Alinha o 'X' corretamente. */
+            line-height: 1;
             transition: color 0.2s ease;
         }
 
         .popup-close-btn:hover {
-            color: #333; /* Cor mais escura ao passar o mouse. */
+            color: #333;
         }
     </style>
 </head>
@@ -202,50 +214,9 @@
     </div>
 
     <main class="main-content">
-        
         <table class="data-table">
-            <thead>
-                <tr>
-                    <th rowspan="2">Secretarias</th>
-                    <th colspan="3">INSTALADOS</th>
-                    <th rowspan="2">TOTAL<br>INSTALADOS</th>
-                </tr>
-                <tr>
-                    <th>DESKTOP - MINIPC</th>
-                    <th>NOTEBOOK</th>
-                    <th>MONITOR</th>
-                </tr>
-            </thead>
-            <tbody>
-                 <tr><td>SEDES</td> <td>129</td> <td>125</td> <td>131</td> <td>254</td></tr>
-                <tr><td>SESAU</td> <td>433</td> <td>20</td> <td>428</td> <td>453</td></tr>
-                <tr><td>SEFAZ</td> <td>41</td> <td>4</td> <td>41</td> <td>45</td></tr>
-                <tr><td>SEDUC</td> <td>463</td> <td>93</td> <td>463</td> <td>556</td></tr>
-                <tr><td>SEO</td> <td>34</td> <td>6</td> <td>35</td> <td>40</td></tr>
-                <tr><td>SAJUR</td> <td>39</td> <td>12</td> <td>39</td> <td>51</td></tr>
-                <tr><td>SECAD</td> <td>98</td> <td>2</td> <td>99</td> <td>100</td></tr>
-                <tr><td>SEGUR</td> <td>117</td> <td>6</td> <td>119</td> <td>123</td></tr>
-                <tr><td>SETUR</td> <td>28</td> <td>2</td> <td>28</td> <td>30</td></tr>
-                <tr><td>SESEP</td> <td>39</td> <td>1</td> <td>38</td> <td>40</td></tr>
-                <tr><td>SEMAM</td> <td>44</td> <td>5</td> <td>44</td> <td>49</td></tr>
-                <tr><td>SEURB</td> <td>52</td> <td>6</td> <td>52</td> <td>58</td></tr>
-                <tr><td>SEPEDI</td> <td>26</td> <td>3</td> <td>28</td> <td>29</td></tr>
-                <tr><td>SEESP</td> <td>22</td> <td>8</td> <td>22</td> <td>30</td></tr>
-                <tr><td>SEGOV</td> <td>72</td> <td>4</td> <td>65</td> <td>76</td></tr>
-                <tr><td>SEPLAN</td> <td>39</td> <td>8</td> <td>46</td> <td>47</td></tr>
-                <tr><td>SEHAB</td> <td>30</td> <td>4</td> <td>30</td> <td>34</td></tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>TOTALIZAÇÃO</td>
-                    <td>1.706</td>
-                    <td>309</td>
-                    <td>1.708</td>
-                    <td class="grand-total">2015</td>
-                </tr>
-            </tfoot>
+            <thead><tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr><tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr></thead><tbody><tr><td>SEDES</td><td>129</td><td>125</td><td>131</td><td>254</td></tr><tr><td>SESAU</td><td>433</td><td>20</td><td>428</td><td>453</td></tr><tr><td>SEFAZ</td><td>41</td><td>4</td><td>41</td><td>45</td></tr><tr><td>SEDUC</td><td>463</td><td>93</td><td>463</td><td>556</td></tr><tr><td>SEO</td><td>34</td><td>6</td><td>35</td><td>40</td></tr><tr><td>SAJUR</td><td>39</td><td>12</td><td>39</td><td>51</td></tr><tr><td>SECAD</td><td>98</td><td>2</td><td>99</td><td>100</td></tr><tr><td>SEGUR</td><td>117</td><td>6</td><td>119</td><td>123</td></tr><tr><td>SETUR</td><td>28</td><td>2</td><td>28</td><td>30</td></tr><tr><td>SESEP</td><td>39</td><td>1</td><td>38</td><td>40</td></tr><tr><td>SEMAM</td><td>44</td><td>5</td><td>44</td><td>49</td></tr><tr><td>SEURB</td><td>52</td><td>6</td><td>52</td><td>58</td></tr><tr><td>SEPEDI</td><td>26</td><td>3</td><td>28</td><td>29</td></tr><tr><td>SEESP</td><td>22</td><td>8</td><td>22</td><td>30</td></tr><tr><td>SEGOV</td><td>72</td><td>4</td><td>65</td><td>76</td></tr><tr><td>SEPLAN</td><td>39</td><td>8</td><td>46</td><td>47</td></tr><tr><td>SEHAB</td><td>30</td><td>4</td><td>30</td><td>34</td></tr></tbody><tfoot><tr><td>TOTALIZAÇÃO</td><td>1.706</td><td>309</td><td>1.708</td><td class="grand-total">2015</td></tr></tfoot>
         </table>
-
     </main>
 
     <footer>
@@ -254,60 +225,100 @@
 
     <div id="equipmentPopup" class="popup-overlay">
         <div class="popup-content">
-            <button class="popup-close-btn" onclick="document.getElementById('equipmentPopup').style.display='none'">&times;</button>
+            <button id="closePopup" class="popup-close-btn">&times;</button>
             <h3 id="popupTitle">Resultado da Pesquisa</h3>
-            <p id="popupMessage">O equipamento de patrimônio **[NÚMERO DO PATRIMÔNIO]** foi encontrado na secretaria **[NOME DA SECRETARIA]**.</p>
-            </div>
+            <div id="popupMessage"></div> 
+        </div>
     </div>
 
     <script>
-        // Seleciona o botão de pesquisa pelo ID
         const searchButton = document.getElementById('searchButton');
-        // Seleciona o popup pelo ID
-        const popup = document.getElementById('equipmentPopup');
-        // Seleciona o título do popup pelo ID
-        const popupTitle = document.getElementById('popupTitle');
-        // Seleciona a mensagem do popup pelo ID
-        const popupMessage = document.getElementById('popupMessage');
-        // Seleciona o campo de input pelo ID
         const patrimonioInput = document.getElementById('patrimonioInput');
+        const popup = document.getElementById('equipmentPopup');
+        const closePopupButton = document.getElementById('closePopup');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupMessage = document.getElementById('popupMessage');
+        
+        // ===== LINK DA SUA PLANILHA INSERIDO AQUI =====
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
 
-        // Adiciona um "ouvinte de evento" ao botão de pesquisa
-        searchButton.addEventListener('click', function() {
-            const patrimonio = patrimonioInput.value.trim(); // Pega o valor do input e remove espaços em branco
+        let equipmentData = [];
 
-            if (patrimonio) { // Se o campo não estiver vazio
-                // Aqui é onde a lógica de busca real entraria
-                // Por enquanto, vamos simular um resultado
-                const encontrado = true; // Assume que sempre encontra para fins de layout
-                const secretaria = "SECRETARIA DE EXEMPLO"; // Nome de exemplo para a secretaria
+        async function fetchSheetData() {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+                equipmentData = parseCSV(csvText);
+                console.log("Dados carregados com sucesso.");
+            } catch (error) {
+                console.error("Erro ao carregar os dados da planilha:", error);
+                alert("Não foi possível carregar os dados dos equipamentos. Verifique o link da planilha ou sua conexão.");
+            }
+        }
 
-                if (encontrado) {
-                    popupTitle.textContent = "Equipamento Encontrado!";
-                    popupMessage.innerHTML = `O equipamento de patrimônio <strong>${patrimonio}</strong> foi encontrado na secretaria <strong>${secretaria}</strong>.`;
-                } else {
-                    popupTitle.textContent = "Equipamento Não Encontrado";
-                    popupMessage.innerHTML = `Não foi possível encontrar o equipamento com patrimônio <strong>${patrimonio}</strong>.`;
-                }
-                
-                popup.style.display = 'flex'; // Exibe o popup (usando 'flex' para centralizar)
+        function parseCSV(text) {
+            const rows = text.trim().split(/\r?\n/); // Divide por nova linha (compatível com Windows/Unix)
+            const headers = rows[0].split(',');
+            
+            return rows.slice(1).map(row => {
+                const values = row.split(',');
+                let obj = {};
+                headers.forEach((header, index) => {
+                    obj[header.trim()] = values[index] ? values[index].trim() : '';
+                });
+                return obj;
+            });
+        }
 
-            } else { // Se o campo estiver vazio
+        function performSearch() {
+            const query = patrimonioInput.value.trim();
+
+            if (!query) {
                 popupTitle.textContent = "Atenção!";
-                popupMessage.textContent = "Por favor, digite um número de patrimônio para pesquisar.";
+                popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>';
                 popup.style.display = 'flex';
+                return;
+            }
+            
+            const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
+
+            if (result) {
+                popupTitle.textContent = "Equipamento Encontrado!";
+                popupMessage.innerHTML = `
+                    <p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO']}</p>
+                    <p><strong>Tipo:</strong> ${result['TIPO']}</p>
+                    <p><strong>Localização:</strong> ${result['LOCALIZAÇÃO']}</p>
+                    <p><strong>Situação:</strong> ${result['SITUAÇÃO']}</p>
+                `;
+            } else {
+                popupTitle.textContent = "Não Encontrado";
+                popupMessage.innerHTML = `<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`;
+            }
+            
+            popup.style.display = 'flex';
+        }
+        
+        searchButton.addEventListener('click', performSearch);
+        
+        patrimonioInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
             }
         });
 
-        // Adiciona um ouvinte de evento para fechar o popup ao clicar fora dele
-        popup.addEventListener('click', function(event) {
-            if (event.target === popup) { // Se o clique foi no overlay, não no conteúdo
+        closePopupButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        popup.addEventListener('click', (event) => {
+            if (event.target === popup) {
                 popup.style.display = 'none';
             }
         });
+        
+        fetchSheetData();
 
     </script>
-
 </body>
 
 </html>
