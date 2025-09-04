@@ -9,70 +9,82 @@
     <style>
         /* --- ESTILOS GERAIS --- */
         body {
-            margin: 0; /* Remove a margem padrão do corpo. */
-            font-family: Arial, sans-serif; /* Define uma fonte mais comum e legível. */
-            background-color: #f4f4f4; /* Adiciona uma cor de fundo suave à página. */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; 
         }
 
         img {
-            max-width: 100%; /* Garante que as imagens não ultrapassem a largura do contêiner. */
-            display: block; /* Remove espaços extras indesejados abaixo das imagens. */
+            max-width: 100%;
+            display: block;
         }
 
         /* --- ESTILOS DO CONTEÚDO PRINCIPAL --- */
         .main-content {
-            padding: 20px; /* Adiciona espaçamento interno na área principal. */
+            padding: 40px 20px; /* Aumentei o espaçamento vertical para a tabela respirar mais. */
         }
 
-        /* --- ESTILOS DA TABELA --- */
+        /* --- NOVOS ESTILOS DA TABELA --- */
         .data-table {
-            width: 90%; /* Define a largura da tabela em 90% da área de conteúdo. */
-            margin: 20px auto; /* Centraliza a tabela na horizontal e adiciona margem em cima/baixo. */
-            border-collapse: collapse; /* Une as bordas das células para um visual limpo. */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil para um efeito "flutuante". */
-            font-size: 14px; /* Define um tamanho de fonte base para a tabela. */
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #333; /* Cor de texto padrão mais escura para melhor legibilidade. */
         }
 
         .data-table th, .data-table td {
-            border: 1px solid #ddd; /* Adiciona uma borda cinza clara em todas as células. */
-            padding: 12px; /* Adiciona espaçamento interno nas células para não colar o texto nas bordas. */
-            text-align: center; /* Centraliza o texto em todas as células. */
+            border: 1px solid #dee2e6; /* Borda cinza um pouco mais sutil. */
+            padding: 12px 15px; /* Aumentei um pouco o espaçamento horizontal. */
+            text-align: center;
         }
 
-        /* Estilos específicos para o cabeçalho da tabela */
+        /* Estilos do cabeçalho da tabela (NOVA PALETA) */
         .data-table thead th {
-            font-weight: bold; /* Deixa o texto do cabeçalho em negrito. */
-            color: #333; /* Cor do texto do cabeçalho. */
+            background-color: #343a40; /* Um cinza bem escuro, quase preto, para o cabeçalho. */
+            color: #ffffff; /* Texto branco para alto contraste. */
+            text-transform: uppercase; /* Deixa o texto do cabeçalho em maiúsculas. */
+            letter-spacing: 0.5px; /* Adiciona um leve espaçamento entre as letras. */
+        }
+        
+        /* Cor de fundo para a segunda linha do cabeçalho */
+        .data-table thead tr:last-child th {
+            background-color: #495057; /* Um tom de cinza um pouco mais claro. */
         }
 
-        /* Cores de fundo para as células do cabeçalho, imitando a imagem */
-        .header-pink { background-color: #f8d7da; }
-        .header-green { background-color: #d4edda; }
-        .header-yellow { background-color: #fff3cd; }
+        /* Estilo para as linhas do corpo da tabela (NOVA PALETA) */
+        .data-table tbody tr {
+            background-color: #ffffff; /* Fundo branco para as linhas ímpares. */
+        }
 
-        /* Estilo para as linhas do corpo da tabela */
         .data-table tbody tr:nth-child(even) {
-            background-color: #e9f5e9; /* Cor de fundo para as linhas pares (efeito zebrado). */
+            background-color: #f8f9fa; /* Um cinza muito claro para as linhas pares (efeito zebrado). */
         }
 
         .data-table tbody tr:hover {
-            background-color: #d1e7dd; /* Muda a cor da linha quando o mouse passa por cima. */
+            background-color: #e9ecef; /* Um cinza mais escuro para o efeito hover. */
         }
         
         .data-table tbody td:first-child {
-            font-weight: bold; /* Deixa o texto da primeira coluna (SEDES, SESAU, etc.) em negrito. */
-            text-align: left; /* Alinha o texto da primeira coluna à esquerda para melhor leitura. */
+            font-weight: bold;
+            text-align: left;
+            color: #0056b3; /* Cor azul para os nomes das secretarias, para dar destaque. */
         }
 
-        /* Estilos para o rodapé da tabela (Totalização) */
+        /* Estilos para o rodapé da tabela (NOVA PALETA) */
         .data-table tfoot {
-            font-weight: bold; /* Deixa o texto do rodapé em negrito. */
-            background-color: #d1e7dd; /* Cor de fundo para a linha de totalização. */
+            font-weight: bold;
+        }
+        
+        .data-table tfoot tr {
+             background-color: #dee2e6; /* Fundo cinza claro para a linha de total. */
         }
         
         .grand-total {
-            background-color: #fec78a; /* Cor de fundo especial para a célula do total geral. */
-            font-size: 1.1em; /* Aumenta um pouco a fonte do total geral para dar destaque. */
+            background-color: #0056b3; /* Cor azul forte para a célula do total geral. */
+            color: #ffffff; /* Texto branco para contrastar. */
+            font-size: 1.2em; /* Fonte maior para o destaque final. */
         }
 
     </style>
@@ -84,23 +96,25 @@
         <img src="images/image2.png" alt="Cabeçalho do site">
     </header>
 
-    <main class="main-content"> <table class="data-table">
+    <main class="main-content">
+        
+        <table class="data-table">
             
             <thead>
                 <tr>
-                    <th rowspan="2"></th> 
-                    <th colspan="3" class="header-green">INSTALADOS</th> 
-                    <th rowspan="2" class="header-yellow">TOTAL<br>INSTALADOS</th>
+                    <th rowspan="2">Secretarias</th> 
+                    <th colspan="3">INSTALADOS</th> 
+                    <th rowspan="2">TOTAL<br>INSTALADOS</th>
                 </tr>
                 <tr>
-                    <th class="header-pink">DESKTOP - MINIPC</th>
-                    <th class="header-green">NOTEBOOK</th>
+                    <th>DESKTOP - MINIPC</th>
+                    <th>NOTEBOOK</th>
                     <th>MONITOR</th>
                 </tr>
             </thead>
             
             <tbody>
-                <tr>
+                 <tr>
                     <td>SEDES</td> <td>129</td> <td>125</td> <td>131</td> <td>254</td>
                 </tr>
                 <tr>
