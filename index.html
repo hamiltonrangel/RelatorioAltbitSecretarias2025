@@ -80,7 +80,6 @@
         
         const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
         
-        // Objeto com TODOS os links das secretarias
         const summaryLinks = {
             sedes:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv',
             sesau:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv',
@@ -112,7 +111,9 @@
                 const desktop = parseInt(data[1][9]) || 0;
                 const notebook = parseInt(data[1][10]) || 0;
                 const monitor = parseInt(data[1][11]) || 0;
-                const total = desktop + notebook + monitor;
+                
+                // ===== CÁLCULO CORRIGIDO AQUI =====
+                const total = desktop + notebook; // Não inclui mais o monitor na soma
 
                 document.getElementById(`${name}-desktop`).textContent = desktop;
                 document.getElementById(`${name}-notebook`).textContent = notebook;
@@ -132,18 +133,14 @@
 
         async function loadAllSummaries() {
             const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url));
-            
             const results = await Promise.all(promises);
-            
             let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
-
             results.forEach(result => {
                 totalDesktop += result.desktop;
                 totalNotebook += result.notebook;
                 totalMonitor += result.monitor;
-                grandTotal += result.total;
+                grandTotal += result.total; // Este valor já vem corrigido da função anterior
             });
-
             document.getElementById('total-desktop').textContent = totalDesktop;
             document.getElementById('total-notebook').textContent = totalNotebook;
             document.getElementById('total-monitor').textContent = totalMonitor;
