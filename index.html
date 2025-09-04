@@ -7,25 +7,8 @@
     <title>Consulta de Patrimônio</title>
 
     <style>
-        /* CSS com a correção */
-        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}
-        
-        /* ===== CORREÇÃO APLICADA AQUI ===== */
-        .popup-overlay {
-            display: none; /* Garante que o popup comece escondido */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            /* A propriedade 'display: flex' foi removida daqui e é controlada apenas pelo JavaScript */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
+        /* O CSS continua o mesmo */
+        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}.popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
     </style>
 </head>
 
@@ -43,31 +26,25 @@
     <main class="main-content">
         <table class="data-table">
             <thead>
-                <tr>
-                    <th rowspan="2">Secretarias</th>
-                    <th colspan="3">INSTALADOS</th>
-                    <th rowspan="2">TOTAL<br>INSTALADOS</th>
-                </tr>
-                <tr>
-                    <th>DESKTOP - MINIPC</th>
-                    <th>NOTEBOOK</th>
-                    <th>MONITOR</th>
-                </tr>
+                <tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr>
+                <tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr>
             </thead>
             <tbody>
                 <tr>
                     <td>SEDES</td> 
-                    <td id="sedes-desktop">...</td> 
-                    <td id="sedes-notebook">...</td>
-                    <td id="sedes-monitor">...</td> 
-                    <td id="sedes-total">...</td>
+                    <td id="sedes-desktop">...</td> <td id="sedes-notebook">...</td>
+                    <td id="sedes-monitor">...</td> <td id="sedes-total">...</td>
                 </tr>
                 <tr><td>SESAU</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 <tr><td>SEFAZ</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 <tr><td>SEDUC</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 <tr><td>SEO</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 <tr><td>SAJUR</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                <tr><td>SECAD</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr>
+                    <td>SECAD</td>
+                    <td id="secad-desktop">...</td> <td id="secad-notebook">...</td>
+                    <td id="secad-monitor">...</td> <td id="secad-total">...</td>
+                </tr>
                 <tr><td>SEGUR</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 <tr><td>SETUR</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 <tr><td>SESEP</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -82,10 +59,8 @@
             <tfoot>
                 <tr>
                     <td>TOTALIZAÇÃO</td>
-                    <td id="total-desktop">0</td>
-                    <td id="total-notebook">0</td>
-                    <td id="total-monitor">0</td>
-                    <td id="grand-total" class="grand-total">0</td>
+                    <td id="total-desktop">...</td> <td id="total-notebook">...</td>
+                    <td id="total-monitor">...</td> <td id="grand-total" class="grand-total">...</td>
                 </tr>
             </tfoot>
         </table>
@@ -111,43 +86,78 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         
+        // --- URLs DAS PLANILHAS ---
         const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
-        const summarySheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv'; 
+        
+        // Objeto para organizar os links das secretarias
+        const summaryLinks = {
+            sedes: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv',
+            secad: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv'
+            // Futuros links entrarão aqui (ex: sesau: 'link_da_sesau')
+        };
 
         let equipmentData = [];
 
-        function parseGenericCSV(text) {
-            const rows = text.trim().split(/\r?\n/);
-            return rows.map(row => row.split(','));
+        // --- FUNÇÕES DE BUSCA E PROCESSAMENTO DE DADOS ---
+
+        // Função reutilizável para buscar e processar os dados de uma secretaria
+        async function fetchSecretariaData(name, url) {
+            try {
+                const response = await fetch(`${url}&t=${new Date().getTime()}`);
+                const csvText = await response.text();
+                const data = csvText.trim().split(/\r?\n/).map(row => row.split(','));
+                
+                // Pega os valores das células J2, K2 e L2 (índices 9, 10, 11 da segunda linha)
+                const desktop = parseInt(data[1][9]) || 0;
+                const notebook = parseInt(data[1][10]) || 0;
+                const monitor = parseInt(data[1][11]) || 0;
+                const total = desktop + notebook + monitor;
+
+                // Atualiza a linha da tabela correspondente
+                document.getElementById(`${name}-desktop`).textContent = desktop;
+                document.getElementById(`${name}-notebook`).textContent = notebook;
+                document.getElementById(`${name}-monitor`).textContent = monitor;
+                document.getElementById(`${name}-total`).textContent = total;
+                
+                // Retorna os valores para a soma total
+                return { desktop, notebook, monitor, total };
+            } catch (error) {
+                console.error(`Erro ao carregar dados da ${name.toUpperCase()}:`, error);
+                // Se der erro, preenche a linha com 0 para não quebrar a soma
+                document.getElementById(`${name}-desktop`).textContent = 0;
+                document.getElementById(`${name}-notebook`).textContent = 0;
+                document.getElementById(`${name}-monitor`).textContent = 0;
+                document.getElementById(`${name}-total`).textContent = 0;
+                return { desktop: 0, notebook: 0, monitor: 0, total: 0 };
+            }
         }
 
-        async function fetchSummaryData() {
-            if (summarySheetUrl === 'URL_DA_SUA_NOVA_PLANILHA_CSV_AQUI') return;
-            try {
-                const response = await fetch(`${summarySheetUrl}&t=${new Date().getTime()}`);
-                const csvText = await response.text();
-                const data = parseGenericCSV(csvText);
-                
-                const desktopValue = parseInt(data[1][9]) || 0;
-                const notebookValue = parseInt(data[1][10]) || 0;
-                const monitorValue = parseInt(data[1][11]) || 0;
-                const totalValue = desktopValue + notebookValue + monitorValue;
+        // Função principal que carrega todos os resumos e calcula o total
+        async function loadAllSummaries() {
+            // Cria uma lista de "promessas" de busca de dados
+            const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url));
+            
+            // Espera todas as buscas terminarem
+            const results = await Promise.all(promises);
+            
+            // Calcula a soma total a partir dos resultados
+            let totalDesktop = 0;
+            let totalNotebook = 0;
+            let totalMonitor = 0;
+            let grandTotal = 0;
 
-                document.getElementById('sedes-desktop').textContent = desktopValue;
-                document.getElementById('sedes-notebook').textContent = notebookValue;
-                document.getElementById('sedes-monitor').textContent = monitorValue;
-                document.getElementById('sedes-total').textContent = totalValue;
+            results.forEach(result => {
+                totalDesktop += result.desktop;
+                totalNotebook += result.notebook;
+                totalMonitor += result.monitor;
+                grandTotal += result.total;
+            });
 
-                document.getElementById('total-desktop').textContent = desktopValue;
-                document.getElementById('total-notebook').textContent = notebookValue;
-                document.getElementById('total-monitor').textContent = monitorValue;
-                document.getElementById('grand-total').textContent = totalValue;
-
-                console.log("Dados de resumo (SEDES) carregados com sucesso.");
-            } catch (error) {
-                console.error("Erro ao carregar os dados da planilha de resumo:", error);
-                alert("Não foi possível carregar os dados da tabela de resumo.");
-            }
+            // Atualiza a linha de TOTALIZAÇÃO no rodapé da tabela
+            document.getElementById('total-desktop').textContent = totalDesktop;
+            document.getElementById('total-notebook').textContent = totalNotebook;
+            document.getElementById('total-monitor').textContent = totalMonitor;
+            document.getElementById('grand-total').textContent = grandTotal;
         }
 
         async function fetchPatrimonioData() {
@@ -164,10 +174,8 @@
                     });
                     return obj;
                 });
-                console.log("Dados de patrimônio carregados.");
             } catch (error) {
-                console.error("Erro ao carregar os dados da planilha de patrimônio:", error);
-                alert("Não foi possível carregar os dados dos equipamentos.");
+                console.error("Erro ao carregar dados de patrimônio:", error);
             }
         }
 
@@ -179,13 +187,15 @@
             popup.style.display="flex";
         }
         
+        // --- EVENTOS ---
         searchButton.addEventListener('click', performSearch);
         patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
         closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
         popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
         
-        fetchPatrimonioData();
-        fetchSummaryData();
+        // --- INICIALIZAÇÃO ---
+        fetchPatrimonioData(); // Busca dados para a pesquisa
+        loadAllSummaries();    // Busca TODOS os dados para a tabela de resumo e calcula os totais
 
     </script>
 </body>
