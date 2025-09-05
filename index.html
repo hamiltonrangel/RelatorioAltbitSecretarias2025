@@ -9,7 +9,6 @@
     <style>
         /* O CSS continua o mesmo */
         body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}
-        /* Estilo para o botão desativado */
         .search-container button:disabled{background-color:#6c757d;cursor:not-allowed;}
         .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
     </style>
@@ -33,39 +32,110 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         
-        const summaryLinks = {
-            sedes:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv', sesau:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv', sefaz:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqtpqYnDxWfSU5Oac4QtXmsTVFITwmQ-V0GBfXmyPV79-NjYGk7cCKEzdsJWA82xU1XP-STq6TLseG/pub?output=csv', seduc:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vT96KwfyePe6BvGohvrafmiX09GPVyhwHmgbpAU8xtNR2w_tPmh3vAsgT9DxG9btYMP2ZgSB7R4hwkl/pub?output=csv', seo:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTr4ZDB9nAX5Xcc7PR6U4PVLevLT6iR9LtagO78l5rXJLAIBptX18_7XibpBLoQTkJA2itRclfngHCU/pub?output=csv', sajur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQiRGFBSFt4fKcGHRT6AWWQib_t3_asreeGuyvXf2iQZXflBTXWc1jt6FyA-KswcJelv9lPdEwLzN-/pub?output=csv', secad:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv', segur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYbQI-4kmzDVk-8gidIEemo4WBkwstLWG0_cujq0TVr2bkpncpuP0QKf9Z0bEA86ytnwnOD6DOETGz/pub?output=csv', setur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vR22O-NuaJNZncqbk5QLK4thdmcb4pkna89pYkmxCzylzlt1lk0y_46IsTJJdFXOpLtJxgpSihyKvhG/pub?output=csv', sesep:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcouhU6Hogz5RLA9aOBeilekBDdUx9SQkBphDTgZAkZAnA4-ESpiaH2ny0Gi86hbxQJKxjl19Ya5aa/pub?output=csv', semam:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwL57uDqdxf-A2nsDK8p8x-opAB3zQRVvF9-hUfiFi-eq0BGeUcD0jwjGCV50lDnvadwOQu6p-1JH/pub?output=csv', seurb:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPV3lR77Vnbl4Dgu4ODpIy8mG-PVHnoj1HoxDo3w6Mq0bumGLI-5B7_lhbCaUApcnD3_2FD-yW1bri/pub?output=csv', sepedi: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdGWjVIgOar0lboU0EugSxr0EHY41JxTZE3uoYxrVoKGmgwRrlp7qKU8zESbzhkb12FLfgFsFo3IRg/pub?output=csv', seesp:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTuOGPyGprm0XpJcWPB7tVBine4yVcf1Nyvh9xIKN6EEoF4J04l_djUqdpkJgt0jzeMpZjtMrshanhR/pub?output=csv', segov:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_ohJlEVoOmTnBV87U9RYX17FgJ5waevFS-yS9bn8mnl3SIm2-2DlccaDAsQrpzf8j2cGTKi5Nh5E/pub?output=csv', seplan: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvBp3FfCmRGhBOgJ6X8TFnR5TwOIi1mNEZ0AGJ3UL-SsWn29YcUcuoXBgdxq8amTDNagwM_4uHnoAQ/pub?output=csv', sehab:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
-        };
-        const patrimonioSheetIDs = {
-            SEDES: '1UXT6RFnsgalF74RT_4sfiZEMFKRcLQrkWMk5sV16c2U', SESAU: '11DxpcQAu4KDXbZhTXhCqofTDYo3Ry6l6aUfCt5-Dlqw', SEFAZ: '14UDroVFC9G9E6f7GZ5w9ImvLrV6-HyOy-NoZq5tE1x0', SEDUC: '1yQLebGqnW8bC3FPcKZPDQ-dGBYqidN5Enfc3VgZ0GxA', SEO: '1wOTY6wgXSblYWyA552guUyoU_75tY3rkJ3SwmfsA45U', SAJUR: '1WPC4GZoN627D4MHTFkkb_UG32a5fjbb5uIXVkKfJQCs', SECAD: '1KRTOZqX--dY9Rpml_TkefpW-niwrV-4mQs_yr-Iw7rU', SEGUR: '1ioPGwLbA0rHusuRtmJml81IHtL3jaZTVKINE4eMewug', SETUR: '152QZfKhKK8XpmFn4UHx5sfAmRsSIftYdL9qT33iz5Ig', SESEP: '1p6Mzn7gHYlvr9tivK809ztF7SNXePAHHKMswl5UB960', SEMAM: '1bDHqci9QTGWw20GQjyJClOoM-IHUGlKZPag8U3RhFcA', SEURB: '1zCclPIaHFdSbR9zFecr_BnOSHrfcPdC8sh9OqhLOHR0', SEPEDI: '1HqO3PMy1NtYfwWhFvTvVpWDdNG1cu8LQ41uZd7WutXA', SEESP: '1jyVW_L5ofi2RY9qnglcCpZFVvL5rIfsy9rDjlL_JzU8', SEGOV: '1LysKNmoFZySVw0X5Ksu_862WVzn6uJwdTRtPIqlIjQ8', SEPLAN: '1nanjFlZchtA_HK5bj9WAk_78YY8mYss8YyoRYPuu0Ps', SEHAB: '1eD2rcpXUo1ElTIMtZgTNfHiGoHap-lVZQhI6dMAE5Qs'
+        // Objeto ÚNICO com os links verificados para TODAS as funcionalidades
+        const sheetLinks = {
+            sedes: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv',
+            sesau: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv',
+            sefaz: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqtpqYnDxWfSU5Oac4QtXmsTVFITwmQ-V0GBfXmyPV79-NjYGk7cCKEzdsJWA82xU1XP-STq6TLseG/pub?output=csv',
+            seduc: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT96KwfyePe6BvGohvrafmiX09GPVyhwHmgbpAU8xtNR2w_tPmh3vAsgT9DxG9btYMP2ZgSB7R4hwkl/pub?output=csv',
+            seo: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTr4ZDB9nAX5Xcc7PR6U4PVLevLT6iR9LtagO78l5rXJLAIBptX18_7XibpBLoQTkJA2itRclfngHCU/pub?output=csv',
+            sajur: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQiRGFBSFt4fKcGHRT6AWWQib_t3_asreeGuyvXf2iQZXflBTXWc1jt6FyA-KswcJelv9lPdEwLzN-/pub?output=csv',
+            secad: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv',
+            segur: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYbQI-4kmzDVk-8gidIEemo4WBkwstLWG0_cujq0TVr2bkpncpuP0QKf9Z0bEA86ytnwnOD6DOETGz/pub?output=csv',
+            setur: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR22O-NuaJNZncqbk5QLK4thdmcb4pkna89pYkmxCzylzlt1lk0y_46IsTJJdFXOpLtJxgpSihyKvhG/pub?output=csv',
+            sesep: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcouhU6Hogz5RLA9aOBeilekBDdUx9SQkBphDTgZAkZAnA4-ESpiaH2ny0Gi86hbxQJKxjl19Ya5aa/pub?output=csv',
+            semam: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwL57uDqdxf-A2nsDK8p8x-opAB3zQRVvF9-hUfiFi-eq0BGeUcD0jwjGCV50lDnvadwOQu6p-1JH/pub?output=csv',
+            seurb: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPV3lR77Vnbl4Dgu4ODpIy8mG-PVHnoj1HoxDo3w6Mq0bumGLI-5B7_lhbCaUApcnD3_2FD-yW1bri/pub?output=csv',
+            sepedi: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdGWjVIgOar0lboU0EugSxr0EHY41JxTZE3uoYxrVoKGmgwRrlp7qKU8zESbzhkb12FLfgFsFo3IRg/pub?output=csv',
+            seesp: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTuOGPyGprm0XpJcWPB7tVBine4yVcf1Nyvh9xIKN6EEoF4J04l_djUqdpkJgt0jzeMpZjtMrshanhR/pub?output=csv',
+            segov: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_ohJlEVoOmTnBV87U9RYX17FgJ5waevFS-yS9bn8mnl3SIm2-2DlccaDAsQrpzf8j2cGTKi5Nh5E/pub?output=csv',
+            seplan: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvBp3FfCmRGhBOgJ6X8TFnR5TwOIi1mNEZ0AGJ3UL-SsWn29YcUcuoXBgdxq8amTDNagwM_4uHnoAQ/pub?output=csv',
+            sehab: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
         };
 
         let equipmentData = [];
 
-        async function fetchSecretariaData(name, url) { try { const response = await fetch(`${url}&t=${new Date().getTime()}`); const csvText = await response.text(); const data = csvText.trim().split(/\r?\n/).map(row => row.split(',')); const desktop = parseInt(data[1][9]) || 0; const notebook = parseInt(data[1][10]) || 0; const monitor = parseInt(data[1][11]) || 0; const total = desktop + notebook; document.getElementById(`${name}-desktop`).textContent = desktop; document.getElementById(`${name}-notebook`).textContent = notebook; document.getElementById(`${name}-monitor`).textContent = monitor; document.getElementById(`${name}-total`).textContent = total; return { desktop, notebook, monitor, total }; } catch (error) { console.error(`Erro ao carregar dados da ${name.toUpperCase()}:`, error); document.getElementById(`${name}-desktop`).textContent = 'Erro'; document.getElementById(`${name}-notebook`).textContent = 'Erro'; document.getElementById(`${name}-monitor`).textContent = 'Erro'; document.getElementById(`${name}-total`).textContent = 'Erro'; return { desktop: 0, notebook: 0, monitor: 0, total: 0 }; } }
-        async function loadAllSummaries() { const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url)); const results = await Promise.all(promises); let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0; results.forEach(result => { totalDesktop += result.desktop; totalNotebook += result.notebook; totalMonitor += result.monitor; grandTotal += result.total; }); document.getElementById('total-desktop').textContent = totalDesktop; document.getElementById('total-notebook').textContent = totalNotebook; document.getElementById('total-monitor').textContent = totalMonitor; document.getElementById('grand-total').textContent = grandTotal; }
+        async function fetchSheetData(secretaria, url) {
+            try {
+                const response = await fetch(`${url}&t=${new Date().getTime()}`);
+                const csvText = await response.text();
+                const rows = csvText.trim().split(/\r?\n/);
+                const headers = rows[0].split(',').map(h => h.trim());
+                
+                // Processa dados para a busca de patrimônio
+                const patrimonioData = rows.slice(1).map(row => {
+                    const values = row.split(',');
+                    let obj = {};
+                    headers.forEach((header, index) => {
+                        obj[header] = values[index] ? values[index].trim() : '';
+                    });
+                    obj['SECRETARIA'] = secretaria.toUpperCase();
+                    return obj;
+                });
 
-        async function fetchSinglePatrimonioSheet(secretaria, sheetId) { const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/pub?output=csv`; try { const response = await fetch(`${url}&t=${new Date().getTime()}`); const csvText = await response.text(); const rows = csvText.trim().split(/\r?\n/); const headers = rows[0].split(',').map(h => h.trim()); const data = rows.slice(1).map(row => { const values = row.split(','); let obj = {}; headers.forEach((header, index) => { obj[header] = values[index] ? values[index].trim() : ''; }); obj['SECRETARIA'] = secretaria; return obj; }); return data; } catch (error) { console.error(`Falha ao carregar dados de patrimônio da ${secretaria}:`, error); return []; } }
+                // Processa dados para a tabela de resumo
+                const summaryData = rows.map(row => row.split(','));
+                const desktop = parseInt(summaryData[1][9]) || 0;
+                const notebook = parseInt(summaryData[1][10]) || 0;
+                const monitor = parseInt(summaryData[1][11]) || 0;
+                const total = desktop + notebook;
 
-        // ===== FUNÇÃO ATUALIZADA COM AVISO DE CARREGAMENTO =====
-        async function loadAllPatrimonioData() {
+                document.getElementById(`${secretaria}-desktop`).textContent = desktop;
+                document.getElementById(`${secretaria}-notebook`).textContent = notebook;
+                document.getElementById(`${secretaria}-monitor`).textContent = monitor;
+                document.getElementById(`${secretaria}-total`).textContent = total;
+
+                return {
+                    summary: { desktop, notebook, monitor, total },
+                    patrimonio: patrimonioData
+                };
+
+            } catch (error) {
+                console.error(`Erro ao carregar dados da ${secretaria.toUpperCase()}:`, error);
+                document.getElementById(`${secretaria}-desktop`).textContent = 'Erro';
+                document.getElementById(`${secretaria}-notebook`).textContent = 'Erro';
+                document.getElementById(`${secretaria}-monitor`).textContent = 'Erro';
+                document.getElementById(`${secretaria}-total`).textContent = 'Erro';
+                return {
+                    summary: { desktop: 0, notebook: 0, monitor: 0, total: 0 },
+                    patrimonio: []
+                };
+            }
+        }
+
+        async function loadAllData() {
             searchButton.textContent = 'Carregando dados...';
             searchButton.disabled = true;
 
-            const promises = Object.entries(patrimonioSheetIDs).map(([name, id]) => fetchSinglePatrimonioSheet(name, id));
+            const promises = Object.entries(sheetLinks).map(([name, url]) => fetchSheetData(name, url));
             
             try {
                 const results = await Promise.all(promises);
-                equipmentData = results.flat();
-                // Adicionando um log de diagnóstico
+
+                // Processa totais do resumo
+                let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
+                results.forEach(result => {
+                    totalDesktop += result.summary.desktop;
+                    totalNotebook += result.summary.notebook;
+                    totalMonitor += result.summary.monitor;
+                    grandTotal += result.summary.total;
+                });
+                document.getElementById('total-desktop').textContent = totalDesktop;
+                document.getElementById('total-notebook').textContent = totalNotebook;
+                document.getElementById('total-monitor').textContent = totalMonitor;
+                document.getElementById('grand-total').textContent = grandTotal;
+
+                // Concatena dados de patrimônio
+                equipmentData = results.map(result => result.patrimonio).flat();
+                
                 console.log(`Carregamento concluído. Total de ${equipmentData.length} equipamentos.`);
                 if (equipmentData.length > 0) {
                     console.log("Exemplo do primeiro item de dados:", equipmentData[0]);
                 }
+
             } catch (error) {
-                console.error("Erro geral ao carregar dados de patrimônio:", error);
+                console.error("Erro geral ao carregar todos os dados:", error);
             } finally {
-                // Isso garante que o botão seja reativado mesmo se houver erro
                 searchButton.textContent = 'Pesquisar Equipamento';
                 searchButton.disabled = false;
             }
@@ -90,8 +160,7 @@
         closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
         popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
         
-        loadAllSummaries();
-        loadAllPatrimonioData();
+        loadAllData();
 
     </script>
 </body>
