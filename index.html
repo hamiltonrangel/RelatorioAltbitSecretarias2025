@@ -32,7 +32,6 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         
-        // ===== LINK DA PLANILHA DE PATRIMÔNIO ATUALIZADO =====
         const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
 
         const summaryLinks = {
@@ -54,6 +53,7 @@
             document.getElementById('total-desktop').textContent = totalDesktop; document.getElementById('total-notebook').textContent = totalNotebook; document.getElementById('total-monitor').textContent = totalMonitor; document.getElementById('grand-total').textContent = grandTotal;
         }
 
+        // ===== FUNÇÃO DE BUSCA CORRIGIDA (PARA PLANILHA SEM CABEÇALHO) =====
         async function loadPatrimonioData() {
             searchButton.textContent = 'Carregando...';
             searchButton.disabled = true;
@@ -61,11 +61,15 @@
                 const response = await fetch(`${patrimonioSheetUrl}&t=${new Date().getTime()}`);
                 const csvText = await response.text();
                 const rows = csvText.trim().split(/\r?\n/);
-                const headers = rows[0].split(',').map(h => h.trim());
+
+                // Como não há cabeçalho, definimos os nomes das colunas manualmente
+                const headers = ['PATRIMÔNIO', 'EQUIPAMENTO', 'SECRETARIA'];
                 
-                equipmentData = rows.slice(1).map(row => {
+                // Agora, processamos TODAS as linhas da planilha como se fossem dados
+                equipmentData = rows.map(row => {
                     const values = row.split(',');
                     let obj = {};
+                    // Usamos nossos headers manuais para criar o objeto
                     headers.forEach((header, index) => {
                         obj[header] = values[index] ? values[index].trim() : '';
                     });
