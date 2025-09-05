@@ -4,201 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Novo Projeto</title>
+    <title>Consulta de Patrimônio</title>
 
     <style>
-        /* --- ESTILOS GERAIS --- */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            min-height: 100vh;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        /* --- ESTILOS DO CONTEÚDO PRINCIPAL --- */
-        .main-content {
-            padding: 40px 20px;
-        }
-
-        /* --- ESTILOS DA TABELA (Mantidos) --- */
-        .data-table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            color: #333;
-        }
-
-        .data-table th,
-        .data-table td {
-            border: 1px solid #dee2e6;
-            padding: 12px 15px;
-            text-align: center;
-        }
-
-        .data-table thead th {
-            background-color: #343a40;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .data-table thead tr:last-child th {
-            background-color: #495057;
-        }
-
-        .data-table tbody tr {
-            background-color: #ffffff;
-        }
-
-        .data-table tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .data-table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        .data-table tbody td:first-child {
-            font-weight: bold;
-            text-align: left;
-            color: #0056b3;
-        }
-
-        .data-table tfoot {
-            font-weight: bold;
-        }
-
-        .data-table tfoot tr {
-            background-color: #dee2e6;
-        }
-
-        .grand-total {
-            background-color: #0056b3;
-            color: #ffffff;
-            font-size: 1.2em;
-        }
-
-        /* --- ESTILOS DA PESQUISA (Mantidos) --- */
-        .search-container {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #ffffff;
-            border-bottom: 1px solid #eee;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .search-container input[type="text"] {
-            padding: 12px 15px;
-            width: 300px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-right: 10px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .search-container input[type="text"]:focus {
-            border-color: #007bff;
-        }
-
-        .search-container button {
-            padding: 12px 25px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-container button:hover {
-            background-color: #0056b3;
-        }
-
-        /* --- ESTILOS DO POPUP (Mantidos) --- */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-content {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            width: 450px;
-            max-width: 90%;
-            text-align: left;
-            position: relative;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .popup-content h3 {
-            margin-top: 0;
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .popup-content p {
-            color: #555;
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-        
-        .popup-content .not-found {
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        .popup-close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #aaa;
-            background: none;
-            border: none;
-            line-height: 1;
-            transition: color 0.2s ease;
-        }
-
-        .popup-close-btn:hover {
-            color: #333;
-        }
+        /* O CSS continua o mesmo */
+        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}.popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
     </style>
 </head>
 
@@ -215,7 +25,36 @@
 
     <main class="main-content">
         <table class="data-table">
-            <thead><tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr><tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr></thead><tbody><tr><td>SEDES</td><td>129</td><td>125</td><td>131</td><td>254</td></tr><tr><td>SESAU</td><td>433</td><td>20</td><td>428</td><td>453</td></tr><tr><td>SEFAZ</td><td>41</td><td>4</td><td>41</td><td>45</td></tr><tr><td>SEDUC</td><td>463</td><td>93</td><td>463</td><td>556</td></tr><tr><td>SEO</td><td>34</td><td>6</td><td>35</td><td>40</td></tr><tr><td>SAJUR</td><td>39</td><td>12</td><td>39</td><td>51</td></tr><tr><td>SECAD</td><td>98</td><td>2</td><td>99</td><td>100</td></tr><tr><td>SEGUR</td><td>117</td><td>6</td><td>119</td><td>123</td></tr><tr><td>SETUR</td><td>28</td><td>2</td><td>28</td><td>30</td></tr><tr><td>SESEP</td><td>39</td><td>1</td><td>38</td><td>40</td></tr><tr><td>SEMAM</td><td>44</td><td>5</td><td>44</td><td>49</td></tr><tr><td>SEURB</td><td>52</td><td>6</td><td>52</td><td>58</td></tr><tr><td>SEPEDI</td><td>26</td><td>3</td><td>28</td><td>29</td></tr><tr><td>SEESP</td><td>22</td><td>8</td><td>22</td><td>30</td></tr><tr><td>SEGOV</td><td>72</td><td>4</td><td>65</td><td>76</td></tr><tr><td>SEPLAN</td><td>39</td><td>8</td><td>46</td><td>47</td></tr><tr><td>SEHAB</td><td>30</td><td>4</td><td>30</td><td>34</td></tr></tbody><tfoot><tr><td>TOTALIZAÇÃO</td><td>1.706</td><td>309</td><td>1.708</td><td class="grand-total">2015</td></tr></tfoot>
+            <thead>
+                <tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr>
+                <tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr>
+                <tr><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr>
+                <tr><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr>
+                <tr><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr>
+                <tr><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr>
+                <tr><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr>
+                <tr><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr>
+                <tr><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr>
+                <tr><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr>
+                <tr><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr>
+                <tr><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr>
+                <tr><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr>
+                <tr><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr>
+                <tr><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr>
+                <tr><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr>
+                <tr><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr>
+                <tr><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>TOTALIZAÇÃO</td>
+                    <td id="total-desktop">...</td> <td id="total-notebook">...</td>
+                    <td id="total-monitor">...</td> <td id="grand-total" class="grand-total">...</td>
+                </tr>
+            </tfoot>
         </table>
     </main>
 
@@ -239,85 +78,112 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
+        const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
+        
+        // Objeto com TODOS os links das secretarias
+        const summaryLinks = {
+            sedes:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv',
+            sesau:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv',
+            sefaz:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqtpqYnDxWfSU5Oac4QtXmsTVFITwmQ-V0GBfXmyPV79-NjYGk7cCKEzdsJWA82xU1XP-STq6TLseG/pub?output=csv',
+            seduc:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vT96KwfyePe6BvGohvrafmiX09GPVyhwHmgbpAU8xtNR2w_tPmh3vAsgT9DxG9btYMP2ZgSB7R4hwkl/pub?output=csv',
+            seo:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTr4ZDB9nAX5Xcc7PR6U4PVLevLT6iR9LtagO78l5rXJLAIBptX18_7XibpBLoQTkJA2itRclfngHCU/pub?output=csv',
+            sajur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQiRGFBSFt4fKcGHRT6AWWQib_t3_asreeGuyvXf2iQZXflBTXWc1jt6FyA-KswcJelv9lPdEwLzN-/pub?output=csv',
+            secad:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv',
+            segur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYbQI-4kmzDVk-8gidIEemo4WBkwstLWG0_cujq0TVr2bkpncpuP0QKf9Z0bEA86ytnwnOD6DOETGz/pub?output=csv',
+            setur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vR22O-NuaJNZncqbk5QLK4thdmcb4pkna89pYkmxCzylzlt1lk0y_46IsTJJdFXOpLtJxgpSihyKvhG/pub?output=csv',
+            sesep:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcouhU6Hogz5RLA9aOBeilekBDdUx9SQkBphDTgZAkZAnA4-ESpiaH2ny0Gi86hbxQJKxjl19Ya5aa/pub?output=csv',
+            semam:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwL57uDqdxf-A2nsDK8p8x-opAB3zQRVvF9-hUfiFi-eq0BGeUcD0jwjGCV50lDnvadwOQu6p-1JH/pub?output=csv',
+            seurb:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPV3lR77Vnbl4Dgu4ODpIy8mG-PVHnoj1HoxDo3w6Mq0bumGLI-5B7_lhbCaUApcnD3_2FD-yW1bri/pub?output=csv',
+            sepedi: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdGWjVIgOar0lboU0EugSxr0EHY41JxTZE3uoYxrVoKGmgwRrlp7qKU8zESbzhkb12FLfgFsFo3IRg/pub?output=csv',
+            seesp:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTuOGPyGprm0XpJcWPB7tVBine4yVcf1Nyvh9xIKN6EEoF4J04l_djUqdpkJgt0jzeMpZjtMrshanhR/pub?output=csv',
+            segov:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_ohJlEVoOmTnBV87U9RYX17FgJ5waevFS-yS9bn8mnl3SIm2-2DlccaDAsQrpzf8j2cGTKi5Nh5E/pub?output=csv',
+            seplan: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvBp3FfCmRGhBOgJ6X8TFnR5TwOIi1mNEZ0AGJ3UL-SsWn29YcUcuoXBgdxq8amTDNagwM_4uHnoAQ/pub?output=csv',
+            sehab:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
+        };
 
         let equipmentData = [];
 
-        async function fetchSheetData() {
+        async function fetchSecretariaData(name, url) {
             try {
-                // Adicionamos um parâmetro para evitar cache, garantindo dados sempre atualizados
-                const response = await fetch(`${sheetUrl}&t=${new Date().getTime()}`);
+                const response = await fetch(`${url}&t=${new Date().getTime()}`);
                 const csvText = await response.text();
-                equipmentData = parseCSV(csvText);
-                console.log("Dados carregados e processados com sucesso.");
+                const data = csvText.trim().split(/\r?\n/).map(row => row.split(','));
+                
+                const desktop = parseInt(data[1][9]) || 0;
+                const notebook = parseInt(data[1][10]) || 0;
+                const monitor = parseInt(data[1][11]) || 0;
+                const total = desktop + notebook + monitor;
+
+                document.getElementById(`${name}-desktop`).textContent = desktop;
+                document.getElementById(`${name}-notebook`).textContent = notebook;
+                document.getElementById(`${name}-monitor`).textContent = monitor;
+                document.getElementById(`${name}-total`).textContent = total;
+                
+                return { desktop, notebook, monitor, total };
             } catch (error) {
-                console.error("Erro ao carregar os dados da planilha:", error);
-                alert("Não foi possível carregar os dados dos equipamentos. Verifique o link da planilha ou sua conexão.");
+                console.error(`Erro ao carregar dados da ${name.toUpperCase()}:`, error);
+                document.getElementById(`${name}-desktop`).textContent = 'Erro';
+                document.getElementById(`${name}-notebook`).textContent = 'Erro';
+                document.getElementById(`${name}-monitor`).textContent = 'Erro';
+                document.getElementById(`${name}-total`).textContent = 'Erro';
+                return { desktop: 0, notebook: 0, monitor: 0, total: 0 };
             }
         }
 
-        function parseCSV(text) {
-            const rows = text.trim().split(/\r?\n/);
-            const headers = rows[0].split(',');
+        async function loadAllSummaries() {
+            const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url));
             
-            return rows.slice(1).map(row => {
-                const values = row.split(',');
-                let obj = {};
-                headers.forEach((header, index) => {
-                    obj[header.trim()] = values[index] ? values[index].trim() : '';
-                });
-                return obj;
+            const results = await Promise.all(promises);
+            
+            let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
+
+            results.forEach(result => {
+                totalDesktop += result.desktop;
+                totalNotebook += result.notebook;
+                totalMonitor += result.monitor;
+                grandTotal += result.total;
             });
+
+            document.getElementById('total-desktop').textContent = totalDesktop;
+            document.getElementById('total-notebook').textContent = totalNotebook;
+            document.getElementById('total-monitor').textContent = totalMonitor;
+            document.getElementById('grand-total').textContent = grandTotal;
+        }
+
+        async function fetchPatrimonioData() {
+            try {
+                const response = await fetch(`${patrimonioSheetUrl}&t=${new Date().getTime()}`);
+                const csvText = await response.text();
+                const rows = csvText.trim().split(/\r?\n/);
+                const headers = rows[0].split(',');
+                equipmentData = rows.slice(1).map(row => {
+                    const values = row.split(',');
+                    let obj = {};
+                    headers.forEach((header, index) => {
+                        obj[header.trim()] = values[index] ? values[index].trim() : '';
+                    });
+                    return obj;
+                });
+            } catch (error) {
+                console.error("Erro ao carregar dados de patrimônio:", error);
+            }
         }
 
         function performSearch() {
             const query = patrimonioInput.value.trim();
-
-            if (!query) {
-                popupTitle.textContent = "Atenção!";
-                popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>';
-                popup.style.display = 'flex';
-                return;
-            }
-            
+            if(!query){popupTitle.textContent="Atenção!";popupMessage.innerHTML='<p class="not-found">Por favor, digite um número de patrimônio.</p>';popup.style.display="flex";return}
             const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
-
-            if (result) {
-                // ===== CÓDIGO CORRIGIDO AQUI =====
-                // Agora usamos os nomes corretos das colunas: 'EQUIPAMENTO' e 'SECRETARIA'
-                popupTitle.textContent = "Equipamento Encontrado!";
-                popupMessage.innerHTML = `
-                    <p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO']}</p>
-                    <p><strong>Equipamento:</strong> ${result['EQUIPAMENTO']}</p>
-                    <p><strong>Secretaria:</strong> ${result['SECRETARIA']}</p>
-                `;
-            } else {
-                popupTitle.textContent = "Não Encontrado";
-                popupMessage.innerHTML = `<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`;
-            }
-            
-            popup.style.display = 'flex';
+            if(result){popupTitle.textContent="Equipamento Encontrado!";popupMessage.innerHTML=`<p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO']}</p><p><strong>Equipamento:</strong> ${result['EQUIPAMENTO']}</p><p><strong>Secretaria:</strong> ${result['SECRETARIA']}</p>`}else{popupTitle.textContent="Não Encontrado";popupMessage.innerHTML=`<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`}
+            popup.style.display="flex";
         }
         
         searchButton.addEventListener('click', performSearch);
+        patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
+        closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
+        popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
         
-        patrimonioInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                performSearch();
-            }
-        });
-
-        closePopupButton.addEventListener('click', () => {
-            popup.style.display = 'none';
-        });
-
-        popup.addEventListener('click', (event) => {
-            if (event.target === popup) {
-                popup.style.display = 'none';
-            }
-        });
-        
-        fetchSheetData();
+        fetchPatrimonioData();
+        loadAllSummaries();
 
     </script>
 </body>
