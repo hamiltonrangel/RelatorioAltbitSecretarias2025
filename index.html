@@ -99,6 +99,30 @@
             sehab:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
         };
 
+        // Objeto com os IDs das planilhas para a busca de patrimônio
+        const patrimonioSheetIDs = {
+            SEDES: '1UXT6RFnsgalF74RT_4sfiZEMFKRcLQrkWMk5sV16c2U',
+            SESAU: '11DxpcQAu4KDXbZhTXhCqofTDYo3Ry6l6aUfCt5-Dlqw',
+            SEFAZ: '14UDroVFC9G9E6f7GZ5w9ImvLrV6-HyOy-NoZq5tE1x0',
+            SEDUC: '1yQLebGqnW8bC3FPcKZPDQ-dGBYqidN5Enfc3VgZ0GxA',
+            SEO: '1wOTY6wgXSblYWyA552guUyoU_75tY3rkJ3SwmfsA45U',
+            SAJUR: '1WPC4GZoN627D4MHTFkkb_UG32a5fjbb5uIXVkKfJQCs',
+            SECAD: '1KRTOZqX--dY9Rpml_TkefpW-niwrV-4mQs_yr-Iw7rU',
+            SEGUR: '1ioPGwLbA0rHusuRtmJml81IHtL3jaZTVKINE4eMewug',
+            SETUR: '152QZfKhKK8XpmFn4UHx5sfAmRsSIftYdL9qT33iz5Ig',
+            SESEP: '1p6Mzn7gHYlvr9tivK809ztF7SNXePAHHKMswl5UB960',
+            SEMAM: '1bDHqci9QTGWw20GQjyJClOoM-IHUGlKZPag8U3RhFcA',
+            SEURB: '1zCclPIaHFdSbR9zFecr_BnOSHrfcPdC8sh9OqhLOHR0',
+            SEPEDI: '1HqO3PMy1NtYfwWhFvTvVpWDdNG1cu8LQ41uZd7WutXA',
+            SEESP: '1jyVW_L5ofi2RY9qnglcCpZFVvL5rIfsy9rDjlL_JzU8',
+            SEGOV: '1LysKNmoFZySVw0X5Ksu_862WVzn6uJwdTRtPIqlIjQ8',
+            SEPLAN: '1nanjFlZchtA_HK5bj9WAk_78YY8mYss8YyoRYPuu0Ps',
+            SEHAB: '1eD2rcpXUo1ElTIMtZgTNfHiGoHap-lVZQhI6dMAE5Qs'
+        };
+
+        // Variável para armazenar todos os dados de patrimônio
+        let equipmentData = [];
+
         // Lógica de busca de resumo (inalterada)
         async function fetchSecretariaData(name, url) {
             try {
@@ -140,12 +164,70 @@
             document.getElementById('grand-total').textContent = grandTotal;
         }
 
-        // ===== LÓGICA DE BUSCA DE PATRIMÔNIO REMOVIDA DAQUI =====
+        // ===== NOVA LÓGICA DE BUSCA DE PATRIMÔNIO =====
         
-        // Função de pesquisa foi alterada para exibir uma mensagem temporária
+        // Função que busca os dados de UMA planilha de patrimônio
+        async function fetchSinglePatrimonioSheet(secretaria, sheetId) {
+            const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/pub?output=csv`;
+            try {
+                const response = await fetch(`${url}&t=${new Date().getTime()}`);
+                const csvText = await response.text();
+                const rows = csvText.trim().split(/\r?\n/);
+                const headers = rows[0].split(',').map(h => h.trim()); // Limpa cabeçalhos
+                // Converte as linhas do CSV em objetos
+                const data = rows.slice(1).map(row => {
+                    const values = row.split(',');
+                    let obj = {};
+                    headers.forEach((header, index) => {
+                        obj[header] = values[index] ? values[index].trim() : '';
+                    });
+                    obj['SECRETARIA'] = secretaria; // Adiciona o nome da secretaria
+                    return obj;
+                });
+                return data;
+            } catch (error) {
+                console.error(`Falha ao carregar dados de patrimônio da ${secretaria}:`, error);
+                return []; // Retorna um array vazio em caso de erro
+            }
+        }
+
+        // Função principal que carrega TODOS os dados de patrimônio de todas as planilhas
+        async function loadAllPatrimonioData() {
+            console.log("Iniciando carregamento de todos os dados de patrimônio...");
+            // Cria uma lista de "promessas" de busca, uma para cada secretaria
+            const promises = Object.entries(patrimonioSheetIDs).map(([name, id]) => fetchSinglePatrimonioSheet(name, id));
+            
+            // Espera todas as buscas terminarem
+            const results = await Promise.all(promises);
+            
+            // Junta os resultados de todas as planilhas em um único array
+            equipmentData = results.flat();
+            console.log(`Carregamento concluído. Total de ${equipmentData.length} equipamentos encontrados.`);
+        }
+
+        // Função de pesquisa agora funciona com os dados pré-carregados
         function performSearch() {
-            popupTitle.textContent = "Função em Manutenção";
-            popupMessage.innerHTML = `<p class="not-found">A busca de patrimônio está sendo atualizada.</p>`;
+            const query = patrimonioInput.value.trim();
+            if (!query) {
+                popupTitle.textContent = "Atenção!";
+                popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>';
+                popup.style.display = "flex";
+                return;
+            }
+
+            const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
+            
+            if (result) {
+                popupTitle.textContent = "Equipamento Encontrado!";
+                popupMessage.innerHTML = `
+                    <p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO'] || 'Não informado'}</p>
+                    <p><strong>Equipamento:</strong> ${result['EQUIPAMENTO'] || 'Não informado'}</p>
+                    <p><strong>Secretaria:</strong> ${result['SECRETARIA'] || 'Não informada'}</p>
+                `;
+            } else {
+                popupTitle.textContent = "Não Encontrado";
+                popupMessage.innerHTML = `<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`;
+            }
             popup.style.display = "flex";
         }
         
@@ -157,6 +239,7 @@
         
         // Inicialização
         loadAllSummaries();
+        loadAllPatrimonioData(); // Inicia o carregamento de todos os dados para a busca
 
     </script>
 </body>
