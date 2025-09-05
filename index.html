@@ -78,9 +78,7 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         
-        const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
-        
-        // Objeto com TODOS os links das secretarias
+        // Objeto com os links das secretarias para o resumo
         const summaryLinks = {
             sedes:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv',
             sesau:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv',
@@ -101,24 +99,20 @@
             sehab:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
         };
 
-        let equipmentData = [];
-
+        // Lógica de busca de resumo (inalterada)
         async function fetchSecretariaData(name, url) {
             try {
                 const response = await fetch(`${url}&t=${new Date().getTime()}`);
                 const csvText = await response.text();
                 const data = csvText.trim().split(/\r?\n/).map(row => row.split(','));
-                
                 const desktop = parseInt(data[1][9]) || 0;
                 const notebook = parseInt(data[1][10]) || 0;
                 const monitor = parseInt(data[1][11]) || 0;
-                const total = desktop + notebook + monitor;
-
+                const total = desktop + notebook;
                 document.getElementById(`${name}-desktop`).textContent = desktop;
                 document.getElementById(`${name}-notebook`).textContent = notebook;
                 document.getElementById(`${name}-monitor`).textContent = monitor;
                 document.getElementById(`${name}-total`).textContent = total;
-                
                 return { desktop, notebook, monitor, total };
             } catch (error) {
                 console.error(`Erro ao carregar dados da ${name.toUpperCase()}:`, error);
@@ -132,57 +126,36 @@
 
         async function loadAllSummaries() {
             const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url));
-            
             const results = await Promise.all(promises);
-            
             let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
-
             results.forEach(result => {
                 totalDesktop += result.desktop;
                 totalNotebook += result.notebook;
                 totalMonitor += result.monitor;
                 grandTotal += result.total;
             });
-
             document.getElementById('total-desktop').textContent = totalDesktop;
             document.getElementById('total-notebook').textContent = totalNotebook;
             document.getElementById('total-monitor').textContent = totalMonitor;
             document.getElementById('grand-total').textContent = grandTotal;
         }
 
-        async function fetchPatrimonioData() {
-            try {
-                const response = await fetch(`${patrimonioSheetUrl}&t=${new Date().getTime()}`);
-                const csvText = await response.text();
-                const rows = csvText.trim().split(/\r?\n/);
-                const headers = rows[0].split(',');
-                equipmentData = rows.slice(1).map(row => {
-                    const values = row.split(',');
-                    let obj = {};
-                    headers.forEach((header, index) => {
-                        obj[header.trim()] = values[index] ? values[index].trim() : '';
-                    });
-                    return obj;
-                });
-            } catch (error) {
-                console.error("Erro ao carregar dados de patrimônio:", error);
-            }
-        }
-
+        // ===== LÓGICA DE BUSCA DE PATRIMÔNIO REMOVIDA DAQUI =====
+        
+        // Função de pesquisa foi alterada para exibir uma mensagem temporária
         function performSearch() {
-            const query = patrimonioInput.value.trim();
-            if(!query){popupTitle.textContent="Atenção!";popupMessage.innerHTML='<p class="not-found">Por favor, digite um número de patrimônio.</p>';popup.style.display="flex";return}
-            const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
-            if(result){popupTitle.textContent="Equipamento Encontrado!";popupMessage.innerHTML=`<p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO']}</p><p><strong>Equipamento:</strong> ${result['EQUIPAMENTO']}</p><p><strong>Secretaria:</strong> ${result['SECRETARIA']}</p>`}else{popupTitle.textContent="Não Encontrado";popupMessage.innerHTML=`<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`}
-            popup.style.display="flex";
+            popupTitle.textContent = "Função em Manutenção";
+            popupMessage.innerHTML = `<p class="not-found">A busca de patrimônio está sendo atualizada.</p>`;
+            popup.style.display = "flex";
         }
         
+        // Event Listeners (inalterados)
         searchButton.addEventListener('click', performSearch);
         patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
         closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
         popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
         
-        fetchPatrimonioData();
+        // Inicialização
         loadAllSummaries();
 
     </script>
