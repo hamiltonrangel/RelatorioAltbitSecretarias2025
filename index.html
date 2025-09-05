@@ -8,67 +8,22 @@
 
     <style>
         /* O CSS continua o mesmo */
-        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}.popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
+        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}
+        /* Estilo para o botão desativado */
+        .search-container button:disabled{background-color:#6c757d;cursor:not-allowed;}
+        .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
     </style>
 </head>
 
 <body>
-
-    <header>
-        <img src="images/image2.png" alt="Cabeçalho do site">
-    </header>
-
+    <header><img src="images/image2.png" alt="Cabeçalho do site"></header>
     <div class="search-container">
         <input type="text" id="patrimonioInput" placeholder="Digite o número de patrimônio...">
         <button id="searchButton">Pesquisar Equipamento</button>
     </div>
-
-    <main class="main-content">
-        <table class="data-table">
-            <thead>
-                <tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr>
-                <tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr>
-                <tr><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr>
-                <tr><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr>
-                <tr><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr>
-                <tr><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr>
-                <tr><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr>
-                <tr><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr>
-                <tr><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr>
-                <tr><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr>
-                <tr><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr>
-                <tr><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr>
-                <tr><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr>
-                <tr><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr>
-                <tr><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr>
-                <tr><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr>
-                <tr><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr>
-                <tr><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>TOTALIZAÇÃO</td>
-                    <td id="total-desktop">...</td> <td id="total-notebook">...</td>
-                    <td id="total-monitor">...</td> <td id="grand-total" class="grand-total">...</td>
-                </tr>
-            </tfoot>
-        </table>
-    </main>
-
-    <footer>
-        <img src="images/image1.png" alt="Rodapé do site">
-    </footer>
-
-    <div id="equipmentPopup" class="popup-overlay">
-        <div class="popup-content">
-            <button id="closePopup" class="popup-close-btn">&times;</button>
-            <h3 id="popupTitle">Resultado da Pesquisa</h3>
-            <div id="popupMessage"></div> 
-        </div>
-    </div>
+    <main class="main-content"><table class="data-table"><thead><tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr><tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr></thead><tbody><tr><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr><tr><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr><tr><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr><tr><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr><tr><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr><tr><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr><tr><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr><tr><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr><tr><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr><tr><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr><tr><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr><tr><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr><tr><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr><tr><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr><tr><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr><tr><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr><tr><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr></tbody><tfoot><tr><td>TOTALIZAÇÃO</td><td id="total-desktop">...</td><td id="total-notebook">...</td><td id="total-monitor">...</td><td id="grand-total" class="grand-total">...</td></tr></tfoot></table></main>
+    <footer><img src="images/image1.png" alt="Rodapé do site"></footer>
+    <div id="equipmentPopup" class="popup-overlay"><div class="popup-content"><button id="closePopup" class="popup-close-btn">&times;</button><h3 id="popupTitle">Resultado da Pesquisa</h3><div id="popupMessage"></div></div></div>
 
     <script>
         const searchButton = document.getElementById('searchButton');
@@ -78,152 +33,51 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         
-        // Objeto com os links das secretarias para o resumo
         const summaryLinks = {
-            sedes:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv',
-            sesau:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv',
-            sefaz:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqtpqYnDxWfSU5Oac4QtXmsTVFITwmQ-V0GBfXmyPV79-NjYGk7cCKEzdsJWA82xU1XP-STq6TLseG/pub?output=csv',
-            seduc:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vT96KwfyePe6BvGohvrafmiX09GPVyhwHmgbpAU8xtNR2w_tPmh3vAsgT9DxG9btYMP2ZgSB7R4hwkl/pub?output=csv',
-            seo:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTr4ZDB9nAX5Xcc7PR6U4PVLevLT6iR9LtagO78l5rXJLAIBptX18_7XibpBLoQTkJA2itRclfngHCU/pub?output=csv',
-            sajur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQiRGFBSFt4fKcGHRT6AWWQib_t3_asreeGuyvXf2iQZXflBTXWc1jt6FyA-KswcJelv9lPdEwLzN-/pub?output=csv',
-            secad:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv',
-            segur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYbQI-4kmzDVk-8gidIEemo4WBkwstLWG0_cujq0TVr2bkpncpuP0QKf9Z0bEA86ytnwnOD6DOETGz/pub?output=csv',
-            setur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vR22O-NuaJNZncqbk5QLK4thdmcb4pkna89pYkmxCzylzlt1lk0y_46IsTJJdFXOpLtJxgpSihyKvhG/pub?output=csv',
-            sesep:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcouhU6Hogz5RLA9aOBeilekBDdUx9SQkBphDTgZAkZAnA4-ESpiaH2ny0Gi86hbxQJKxjl19Ya5aa/pub?output=csv',
-            semam:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwL57uDqdxf-A2nsDK8p8x-opAB3zQRVvF9-hUfiFi-eq0BGeUcD0jwjGCV50lDnvadwOQu6p-1JH/pub?output=csv',
-            seurb:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPV3lR77Vnbl4Dgu4ODpIy8mG-PVHnoj1HoxDo3w6Mq0bumGLI-5B7_lhbCaUApcnD3_2FD-yW1bri/pub?output=csv',
-            sepedi: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdGWjVIgOar0lboU0EugSxr0EHY41JxTZE3uoYxrVoKGmgwRrlp7qKU8zESbzhkb12FLfgFsFo3IRg/pub?output=csv',
-            seesp:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTuOGPyGprm0XpJcWPB7tVBine4yVcf1Nyvh9xIKN6EEoF4J04l_djUqdpkJgt0jzeMpZjtMrshanhR/pub?output=csv',
-            segov:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_ohJlEVoOmTnBV87U9RYX17FgJ5waevFS-yS9bn8mnl3SIm2-2DlccaDAsQrpzf8j2cGTKi5Nh5E/pub?output=csv',
-            seplan: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvBp3FfCmRGhBOgJ6X8TFnR5TwOIi1mNEZ0AGJ3UL-SsWn29YcUcuoXBgdxq8amTDNagwM_4uHnoAQ/pub?output=csv',
-            sehab:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
+            sedes:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv', sesau:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv', sefaz:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqtpqYnDxWfSU5Oac4QtXmsTVFITwmQ-V0GBfXmyPV79-NjYGk7cCKEzdsJWA82xU1XP-STq6TLseG/pub?output=csv', seduc:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vT96KwfyePe6BvGohvrafmiX09GPVyhwHmgbpAU8xtNR2w_tPmh3vAsgT9DxG9btYMP2ZgSB7R4hwkl/pub?output=csv', seo:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTr4ZDB9nAX5Xcc7PR6U4PVLevLT6iR9LtagO78l5rXJLAIBptX18_7XibpBLoQTkJA2itRclfngHCU/pub?output=csv', sajur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQiRGFBSFt4fKcGHRT6AWWQib_t3_asreeGuyvXf2iQZXflBTXWc1jt6FyA-KswcJelv9lPdEwLzN-/pub?output=csv', secad:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv', segur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYbQI-4kmzDVk-8gidIEemo4WBkwstLWG0_cujq0TVr2bkpncpuP0QKf9Z0bEA86ytnwnOD6DOETGz/pub?output=csv', setur:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vR22O-NuaJNZncqbk5QLK4thdmcb4pkna89pYkmxCzylzlt1lk0y_46IsTJJdFXOpLtJxgpSihyKvhG/pub?output=csv', sesep:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcouhU6Hogz5RLA9aOBeilekBDdUx9SQkBphDTgZAkZAnA4-ESpiaH2ny0Gi86hbxQJKxjl19Ya5aa/pub?output=csv', semam:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwL57uDqdxf-A2nsDK8p8x-opAB3zQRVvF9-hUfiFi-eq0BGeUcD0jwjGCV50lDnvadwOQu6p-1JH/pub?output=csv', seurb:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPV3lR77Vnbl4Dgu4ODpIy8mG-PVHnoj1HoxDo3w6Mq0bumGLI-5B7_lhbCaUApcnD3_2FD-yW1bri/pub?output=csv', sepedi: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdGWjVIgOar0lboU0EugSxr0EHY41JxTZE3uoYxrVoKGmgwRrlp7qKU8zESbzhkb12FLfgFsFo3IRg/pub?output=csv', seesp:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTuOGPyGprm0XpJcWPB7tVBine4yVcf1Nyvh9xIKN6EEoF4J04l_djUqdpkJgt0jzeMpZjtMrshanhR/pub?output=csv', segov:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_ohJlEVoOmTnBV87U9RYX17FgJ5waevFS-yS9bn8mnl3SIm2-2DlccaDAsQrpzf8j2cGTKi5Nh5E/pub?output=csv', seplan: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvBp3FfCmRGhBOgJ6X8TFnR5TwOIi1mNEZ0AGJ3UL-SsWn29YcUcuoXBgdxq8amTDNagwM_4uHnoAQ/pub?output=csv', sehab:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
         };
-
-        // Objeto com os IDs das planilhas para a busca de patrimônio
         const patrimonioSheetIDs = {
-            SEDES: '1UXT6RFnsgalF74RT_4sfiZEMFKRcLQrkWMk5sV16c2U',
-            SESAU: '11DxpcQAu4KDXbZhTXhCqofTDYo3Ry6l6aUfCt5-Dlqw',
-            SEFAZ: '14UDroVFC9G9E6f7GZ5w9ImvLrV6-HyOy-NoZq5tE1x0',
-            SEDUC: '1yQLebGqnW8bC3FPcKZPDQ-dGBYqidN5Enfc3VgZ0GxA',
-            SEO: '1wOTY6wgXSblYWyA552guUyoU_75tY3rkJ3SwmfsA45U',
-            SAJUR: '1WPC4GZoN627D4MHTFkkb_UG32a5fjbb5uIXVkKfJQCs',
-            SECAD: '1KRTOZqX--dY9Rpml_TkefpW-niwrV-4mQs_yr-Iw7rU',
-            SEGUR: '1ioPGwLbA0rHusuRtmJml81IHtL3jaZTVKINE4eMewug',
-            SETUR: '152QZfKhKK8XpmFn4UHx5sfAmRsSIftYdL9qT33iz5Ig',
-            SESEP: '1p6Mzn7gHYlvr9tivK809ztF7SNXePAHHKMswl5UB960',
-            SEMAM: '1bDHqci9QTGWw20GQjyJClOoM-IHUGlKZPag8U3RhFcA',
-            SEURB: '1zCclPIaHFdSbR9zFecr_BnOSHrfcPdC8sh9OqhLOHR0',
-            SEPEDI: '1HqO3PMy1NtYfwWhFvTvVpWDdNG1cu8LQ41uZd7WutXA',
-            SEESP: '1jyVW_L5ofi2RY9qnglcCpZFVvL5rIfsy9rDjlL_JzU8',
-            SEGOV: '1LysKNmoFZySVw0X5Ksu_862WVzn6uJwdTRtPIqlIjQ8',
-            SEPLAN: '1nanjFlZchtA_HK5bj9WAk_78YY8mYss8YyoRYPuu0Ps',
-            SEHAB: '1eD2rcpXUo1ElTIMtZgTNfHiGoHap-lVZQhI6dMAE5Qs'
+            SEDES: '1UXT6RFnsgalF74RT_4sfiZEMFKRcLQrkWMk5sV16c2U', SESAU: '11DxpcQAu4KDXbZhTXhCqofTDYo3Ry6l6aUfCt5-Dlqw', SEFAZ: '14UDroVFC9G9E6f7GZ5w9ImvLrV6-HyOy-NoZq5tE1x0', SEDUC: '1yQLebGqnW8bC3FPcKZPDQ-dGBYqidN5Enfc3VgZ0GxA', SEO: '1wOTY6wgXSblYWyA552guUyoU_75tY3rkJ3SwmfsA45U', SAJUR: '1WPC4GZoN627D4MHTFkkb_UG32a5fjbb5uIXVkKfJQCs', SECAD: '1KRTOZqX--dY9Rpml_TkefpW-niwrV-4mQs_yr-Iw7rU', SEGUR: '1ioPGwLbA0rHusuRtmJml81IHtL3jaZTVKINE4eMewug', SETUR: '152QZfKhKK8XpmFn4UHx5sfAmRsSIftYdL9qT33iz5Ig', SESEP: '1p6Mzn7gHYlvr9tivK809ztF7SNXePAHHKMswl5UB960', SEMAM: '1bDHqci9QTGWw20GQjyJClOoM-IHUGlKZPag8U3RhFcA', SEURB: '1zCclPIaHFdSbR9zFecr_BnOSHrfcPdC8sh9OqhLOHR0', SEPEDI: '1HqO3PMy1NtYfwWhFvTvVpWDdNG1cu8LQ41uZd7WutXA', SEESP: '1jyVW_L5ofi2RY9qnglcCpZFVvL5rIfsy9rDjlL_JzU8', SEGOV: '1LysKNmoFZySVw0X5Ksu_862WVzn6uJwdTRtPIqlIjQ8', SEPLAN: '1nanjFlZchtA_HK5bj9WAk_78YY8mYss8YyoRYPuu0Ps', SEHAB: '1eD2rcpXUo1ElTIMtZgTNfHiGoHap-lVZQhI6dMAE5Qs'
         };
 
-        // Variável para armazenar todos os dados de patrimônio
         let equipmentData = [];
 
-        // Lógica de busca de resumo (inalterada)
-        async function fetchSecretariaData(name, url) {
-            try {
-                const response = await fetch(`${url}&t=${new Date().getTime()}`);
-                const csvText = await response.text();
-                const data = csvText.trim().split(/\r?\n/).map(row => row.split(','));
-                const desktop = parseInt(data[1][9]) || 0;
-                const notebook = parseInt(data[1][10]) || 0;
-                const monitor = parseInt(data[1][11]) || 0;
-                const total = desktop + notebook;
-                document.getElementById(`${name}-desktop`).textContent = desktop;
-                document.getElementById(`${name}-notebook`).textContent = notebook;
-                document.getElementById(`${name}-monitor`).textContent = monitor;
-                document.getElementById(`${name}-total`).textContent = total;
-                return { desktop, notebook, monitor, total };
-            } catch (error) {
-                console.error(`Erro ao carregar dados da ${name.toUpperCase()}:`, error);
-                document.getElementById(`${name}-desktop`).textContent = 'Erro';
-                document.getElementById(`${name}-notebook`).textContent = 'Erro';
-                document.getElementById(`${name}-monitor`).textContent = 'Erro';
-                document.getElementById(`${name}-total`).textContent = 'Erro';
-                return { desktop: 0, notebook: 0, monitor: 0, total: 0 };
-            }
-        }
+        async function fetchSecretariaData(name, url) { try { const response = await fetch(`${url}&t=${new Date().getTime()}`); const csvText = await response.text(); const data = csvText.trim().split(/\r?\n/).map(row => row.split(',')); const desktop = parseInt(data[1][9]) || 0; const notebook = parseInt(data[1][10]) || 0; const monitor = parseInt(data[1][11]) || 0; const total = desktop + notebook; document.getElementById(`${name}-desktop`).textContent = desktop; document.getElementById(`${name}-notebook`).textContent = notebook; document.getElementById(`${name}-monitor`).textContent = monitor; document.getElementById(`${name}-total`).textContent = total; return { desktop, notebook, monitor, total }; } catch (error) { console.error(`Erro ao carregar dados da ${name.toUpperCase()}:`, error); document.getElementById(`${name}-desktop`).textContent = 'Erro'; document.getElementById(`${name}-notebook`).textContent = 'Erro'; document.getElementById(`${name}-monitor`).textContent = 'Erro'; document.getElementById(`${name}-total`).textContent = 'Erro'; return { desktop: 0, notebook: 0, monitor: 0, total: 0 }; } }
+        async function loadAllSummaries() { const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url)); const results = await Promise.all(promises); let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0; results.forEach(result => { totalDesktop += result.desktop; totalNotebook += result.notebook; totalMonitor += result.monitor; grandTotal += result.total; }); document.getElementById('total-desktop').textContent = totalDesktop; document.getElementById('total-notebook').textContent = totalNotebook; document.getElementById('total-monitor').textContent = totalMonitor; document.getElementById('grand-total').textContent = grandTotal; }
 
-        async function loadAllSummaries() {
-            const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSecretariaData(name, url));
-            const results = await Promise.all(promises);
-            let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
-            results.forEach(result => {
-                totalDesktop += result.desktop;
-                totalNotebook += result.notebook;
-                totalMonitor += result.monitor;
-                grandTotal += result.total;
-            });
-            document.getElementById('total-desktop').textContent = totalDesktop;
-            document.getElementById('total-notebook').textContent = totalNotebook;
-            document.getElementById('total-monitor').textContent = totalMonitor;
-            document.getElementById('grand-total').textContent = grandTotal;
-        }
+        async function fetchSinglePatrimonioSheet(secretaria, sheetId) { const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/pub?output=csv`; try { const response = await fetch(`${url}&t=${new Date().getTime()}`); const csvText = await response.text(); const rows = csvText.trim().split(/\r?\n/); const headers = rows[0].split(',').map(h => h.trim()); const data = rows.slice(1).map(row => { const values = row.split(','); let obj = {}; headers.forEach((header, index) => { obj[header] = values[index] ? values[index].trim() : ''; }); obj['SECRETARIA'] = secretaria; return obj; }); return data; } catch (error) { console.error(`Falha ao carregar dados de patrimônio da ${secretaria}:`, error); return []; } }
 
-        // ===== NOVA LÓGICA DE BUSCA DE PATRIMÔNIO =====
-        
-        // Função que busca os dados de UMA planilha de patrimônio
-        async function fetchSinglePatrimonioSheet(secretaria, sheetId) {
-            const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/pub?output=csv`;
-            try {
-                const response = await fetch(`${url}&t=${new Date().getTime()}`);
-                const csvText = await response.text();
-                const rows = csvText.trim().split(/\r?\n/);
-                const headers = rows[0].split(',').map(h => h.trim()); // Limpa cabeçalhos
-                // Converte as linhas do CSV em objetos
-                const data = rows.slice(1).map(row => {
-                    const values = row.split(',');
-                    let obj = {};
-                    headers.forEach((header, index) => {
-                        obj[header] = values[index] ? values[index].trim() : '';
-                    });
-                    obj['SECRETARIA'] = secretaria; // Adiciona o nome da secretaria
-                    return obj;
-                });
-                return data;
-            } catch (error) {
-                console.error(`Falha ao carregar dados de patrimônio da ${secretaria}:`, error);
-                return []; // Retorna um array vazio em caso de erro
-            }
-        }
-
-        // Função principal que carrega TODOS os dados de patrimônio de todas as planilhas
+        // ===== FUNÇÃO ATUALIZADA COM AVISO DE CARREGAMENTO =====
         async function loadAllPatrimonioData() {
-            console.log("Iniciando carregamento de todos os dados de patrimônio...");
-            // Cria uma lista de "promessas" de busca, uma para cada secretaria
+            searchButton.textContent = 'Carregando dados...';
+            searchButton.disabled = true;
+
             const promises = Object.entries(patrimonioSheetIDs).map(([name, id]) => fetchSinglePatrimonioSheet(name, id));
             
-            // Espera todas as buscas terminarem
-            const results = await Promise.all(promises);
-            
-            // Junta os resultados de todas as planilhas em um único array
-            equipmentData = results.flat();
-            console.log(`Carregamento concluído. Total de ${equipmentData.length} equipamentos encontrados.`);
+            try {
+                const results = await Promise.all(promises);
+                equipmentData = results.flat();
+                // Adicionando um log de diagnóstico
+                console.log(`Carregamento concluído. Total de ${equipmentData.length} equipamentos.`);
+                if (equipmentData.length > 0) {
+                    console.log("Exemplo do primeiro item de dados:", equipmentData[0]);
+                }
+            } catch (error) {
+                console.error("Erro geral ao carregar dados de patrimônio:", error);
+            } finally {
+                // Isso garante que o botão seja reativado mesmo se houver erro
+                searchButton.textContent = 'Pesquisar Equipamento';
+                searchButton.disabled = false;
+            }
         }
 
-        // Função de pesquisa agora funciona com os dados pré-carregados
         function performSearch() {
             const query = patrimonioInput.value.trim();
-            if (!query) {
-                popupTitle.textContent = "Atenção!";
-                popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>';
-                popup.style.display = "flex";
-                return;
-            }
-
+            if (!query) { popupTitle.textContent = "Atenção!"; popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>'; popup.style.display = "flex"; return; }
             const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
-            
             if (result) {
                 popupTitle.textContent = "Equipamento Encontrado!";
-                popupMessage.innerHTML = `
-                    <p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO'] || 'Não informado'}</p>
-                    <p><strong>Equipamento:</strong> ${result['EQUIPAMENTO'] || 'Não informado'}</p>
-                    <p><strong>Secretaria:</strong> ${result['SECRETARIA'] || 'Não informada'}</p>
-                `;
+                popupMessage.innerHTML = `<p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO'] || 'Não informado'}</p><p><strong>Equipamento:</strong> ${result['EQUIPAMENTO'] || 'Não informado'}</p><p><strong>Secretaria:</strong> ${result['SECRETARIA'] || 'Não informada'}</p>`;
             } else {
                 popupTitle.textContent = "Não Encontrado";
                 popupMessage.innerHTML = `<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`;
@@ -231,17 +85,14 @@
             popup.style.display = "flex";
         }
         
-        // Event Listeners (inalterados)
         searchButton.addEventListener('click', performSearch);
         patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
         closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
         popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
         
-        // Inicialização
         loadAllSummaries();
-        loadAllPatrimonioData(); // Inicia o carregamento de todos os dados para a busca
+        loadAllPatrimonioData();
 
     </script>
 </body>
-
 </html>
