@@ -7,51 +7,36 @@
     <title>Consulta de Patrimônio</title>
 
     <style>
-        /* CSS Básico */
-        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; min-height: 100vh; }
-        img { max-width: 100%; display: block; }
-        .main-content { padding: 40px 20px; }
-
-        /* Estilos da Tabela Principal */
-        .data-table { width: 90%; margin: 20px auto; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0, 0, 0, .1); font-size: 14px; color: #333; }
-        .data-table th, .data-table td { border: 1px solid #dee2e6; padding: 12px 15px; text-align: center; }
-        .data-table thead th { background-color: #343a40; color: #fff; text-transform: uppercase; letter-spacing: .5px; }
-        .data-table thead tr:last-child th { background-color: #495057; }
-        .data-table tbody tr { background-color: #fff; transition: background-color 0.2s ease; }
-        .data-table tbody tr:nth-child(even) { background-color: #f8f9fa; }
+        /* CSS base (sem alterações) */
+        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}
+        .search-container button:disabled{background-color:#6c757d;cursor:not-allowed;}
+        .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:600px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
         
-        /* --- NOVO: Estilo para linhas clicáveis --- */
-        .data-table tbody tr[data-secretaria] { cursor: pointer; }
-        .data-table tbody tr[data-secretaria]:hover { background-color: #e0eafc; } /* Cor de hover mais pronunciada */
-
-        .data-table tbody td:first-child { font-weight: 700; text-align: left; color: #0056b3; }
-        .data-table tfoot { font-weight: 700; }
-        .data-table tfoot tr { background-color: #dee2e6; }
-        .grand-total { background-color: #0056b3; color: #fff; font-size: 1.2em; }
-
-        /* Container de Busca */
-        .search-container { text-align: center; padding: 30px 20px; background-color: #fff; border-bottom: 1px solid #eee; box-shadow: 0 2px 5px rgba(0, 0, 0, .05); }
-        .search-container input[type=text] { padding: 12px 15px; width: 300px; border: 1px solid #ced4da; border-radius: 5px; font-size: 16px; margin-right: 10px; outline: 0; transition: border-color .3s ease; }
-        .search-container input[type=text]:focus { border-color: #007bff; }
-        .search-container button { padding: 12px 25px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color .3s ease; }
-        .search-container button:hover { background-color: #0056b3; }
-        .search-container button:disabled { background-color: #6c757d; cursor: not-allowed; }
-
-        /* Pop-up */
-        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, .6); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; padding: 20px 0; }
-        .popup-content { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, .3); width: 90%; max-width: 800px; /* Aumentei a largura máxima para comportar a tabela de detalhes */ text-align: left; position: relative; animation: fadeIn .3s ease-out; margin: auto; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(.9) } to { opacity: 1; transform: scale(1) } }
-        .popup-content h3 { margin-top: 0; color: #333; font-size: 24px; margin-bottom: 20px; text-align: center; }
-        .popup-content p { color: #555; font-size: 16px; line-height: 1.8; margin-bottom: 10px; }
-        .popup-content .not-found { text-align: center; font-weight: 700; font-size: 18px; }
-        .popup-close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #aaa; background: 0 0; border: none; line-height: 1; transition: color .2s ease; }
-        .popup-close-btn:hover { color: #333; }
-
-        /* --- NOVO: Estilo para a tabela de detalhes dentro do pop-up --- */
-        .popup-detail-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; max-height: 60vh; overflow-y: auto; display: block; }
-        .popup-detail-table th, .popup-detail-table td { border: 1px solid #ddd; padding: 8px; text-align: left; word-break: break-word; }
-        .popup-detail-table th { background-color: #f2f2f2; font-weight: bold; }
-        .popup-detail-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+        /* Estilos para a nova funcionalidade */
+        .secretary-row {
+            cursor: pointer; /* Muda o cursor para indicar que a linha é clicável */
+        }
+        .popup-table-container {
+            max-height: 400px; /* Altura máxima para a tabela no popup */
+            overflow-y: auto;  /* Adiciona barra de rolagem vertical se necessário */
+            margin-top: 15px;
+        }
+        .popup-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .popup-table th, .popup-table td {
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .popup-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            position: sticky; /* Faz o cabeçalho da tabela ficar fixo ao rolar */
+            top: 0;
+        }
     </style>
 </head>
 
@@ -67,24 +52,24 @@
                 <tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr>
                 <tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr>
             </thead>
-            <tbody>
-                <tr data-secretaria="sedes"><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr>
-                <tr data-secretaria="sesau"><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr>
-                <tr data-secretaria="sefaz"><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr>
-                <tr data-secretaria="seduc"><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr>
-                <tr data-secretaria="seo"><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr>
-                <tr data-secretaria="sajur"><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr>
-                <tr data-secretaria="secad"><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr>
-                <tr data-secretaria="segur"><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr>
-                <tr data-secretaria="setur"><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr>
-                <tr data-secretaria="sesep"><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr>
-                <tr data-secretaria="semam"><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr>
-                <tr data-secretaria="seurb"><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr>
-                <tr data-secretaria="sepedi"><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr>
-                <tr data-secretaria="seesp"><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr>
-                <tr data-secretaria="segov"><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr>
-                <tr data-secretaria="seplan"><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr>
-                <tr data-secretaria="sehab"><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr>
+            <tbody id="secretarias-tbody">
+                <tr class="secretary-row" data-secretaria="sedes"><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="sesau"><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="sefaz"><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="seduc"><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="seo"><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="sajur"><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="secad"><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="segur"><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="setur"><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="sesep"><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="semam"><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="seurb"><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="sepedi"><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="seesp"><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="segov"><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="seplan"><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr>
+                <tr class="secretary-row" data-secretaria="sehab"><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr>
             </tbody>
             <tfoot>
                 <tr><td>TOTALIZAÇÃO</td><td id="total-desktop">...</td><td id="total-notebook">...</td><td id="total-monitor">...</td><td id="grand-total" class="grand-total">...</td></tr>
@@ -92,210 +77,300 @@
         </table>
     </main>
     <footer><img src="images/image1.png" alt="Rodapé do site"></footer>
-    <div id="equipmentPopup" class="popup-overlay">
-        <div class="popup-content">
-            <button id="closePopup" class="popup-close-btn">&times;</button>
-            <h3 id="popupTitle">Resultado da Pesquisa</h3>
-            <div id="popupMessage"></div>
-        </div>
-    </div>
+    <div id="equipmentPopup" class="popup-overlay"><div class="popup-content"><button id="closePopup" class="popup-close-btn">&times;</button><h3 id="popupTitle">Resultado da Pesquisa</h3><div id="popupMessage"></div></div></div>
 
     <script>
-        // --- Elementos do DOM ---
+        // ===================================================================================
+        // BLOCO 1: DEFINIÇÃO DE CONSTANTES E VARIÁVEIS GLOBAIS
+        // ===================================================================================
+
+        // Guarda referências aos elementos HTML que vamos manipular (botões, inputs, etc.).
+        // Fazer isso no início melhora a performance, pois não precisamos buscar os elementos toda hora.
         const searchButton = document.getElementById('searchButton');
         const patrimonioInput = document.getElementById('patrimonioInput');
         const popup = document.getElementById('equipmentPopup');
         const closePopupButton = document.getElementById('closePopup');
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
-
-        // --- URLs das Planilhas ---
+        
+        // URL da planilha principal que contém TODOS os patrimônios para a função de BUSCA.
         const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
 
+        // Objeto que mapeia o nome de cada secretaria à sua respectiva URL de planilha (publicada como CSV).
+        // Isso organiza os links e facilita o acesso posterior.
         const summaryLinks = {
             sedes: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTElbCJ9hts9cWRNkliTssOBAjSJaBLhlTF7_n1KW7ZOp2uvdYWy-YNH-rms2QVBPFv-tSZr2GioTT7/pub?output=csv', sesau: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgaOtPfbejjwEzkGXKbGsbHXQNNaXZWLCsmXB-9EWXDzXc6raxra2cs-u3FQbLXxNFJgLUY55za4oc/pub?output=csv', sefaz: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqtpqYnDxWfSU5Oac4QtXmsTVFITwmQ-V0GBfXmyPV79-NjYGk7cCKEzdsJWA82xU1XP-STq6TLseG/pub?output=csv', seduc: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT96KwfyePe6BvGohvrafmiX09GPVyhwHmgbpAU8xtNR2w_tPmh3vAsgT9DxG9btYMP2ZgSB7R4hwkl/pub?output=csv', seo: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTr4ZDB9nAX5Xcc7PR6U4PVLevLT6iR9LtagO78l5rXJLAIBptX18_7XibpBLoQTkJA2itRclfngHCU/pub?output=csv', sajur: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQiRGFBSFt4fKcGHRT6AWWQib_t3_asreeGuyvXf2iQZXflBTXWc1jt6FyA-KswcJelv9lPdEwLzN-/pub?output=csv', secad: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQv2Aq2Ri2UkBQdftErTcICf814H411Wg_hLCUfIomrzAsGUhN_mLIOBsTWDMU22NiIM2-JzKosFtM/pub?output=csv', segur: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYbQI-4kmzDVk-8gidIEemo4WBkwstLWG0_cujq0TVr2bkpncpuP0QKf9Z0bEA86ytnwnOD6DOETGz/pub?output=csv', setur: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR22O-NuaJNZncqbk5QLK4thdmcb4pkna89pYkmxCzylzlt1lk0y_46IsTJJdFXOpLtJxgpSihyKvhG/pub?output=csv', sesep: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcouhU6Hogz5RLA9aOBeilekBDdUx9SQkBphDTgZAkZAnA4-ESpiaH2ny0Gi86hbxQJKxjl19Ya5aa/pub?output=csv', semam: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwL57uDqdxf-A2nsDK8p8x-opAB3zQRVvF9-hUfiFi-eq0BGeUcD0jwjGCV50lDnvadwOQu6p-1JH/pub?output=csv', seurb: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPV3lR77Vnbl4Dgu4ODpIy8mG-PVHnoj1HoxDo3w6Mq0bumGLI-5B7_lhbCaUApcnD3_2FD-yW1bri/pub?output=csv', sepedi: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdGWjVIgOar0lboU0EugSxr0EHY41JxTZE3uoYxrVoKGmgwRrlp7qKU8zESbzhkb12FLfgFsFo3IRg/pub?output=csv', seesp: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTuOGPyGprm0XpJcWPB7tVBine4yVcf1Nyvh9xIKN6EEoF4J04l_djUqdpkJgt0jzeMpZjtMrshanhR/pub?output=csv', segov: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_ohJlEVoOmTnBV87U9RYX17FgJ5waevFS-yS9bn8mnl3SIm2-2DlccaDAsQrpzf8j2cGTKi5Nh5E/pub?output=csv', seplan: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvBp3FfCmRGhBOgJ6X8TFnR5TwOIi1mNEZ0AGJ3UL-SsWn29YcUcuoXBgdxq8amTDNagwM_4uHnoAQ/pub?output=csv', sehab: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ4FvL4jp25NJPv9bA0hYRLoEadx0IR4xOJuah-hDhmLRals2To9CqhzICrVnp-Wn2p1hyeftqW49K/pub?output=csv'
         };
 
+        // Array que vai armazenar os dados da planilha de patrimônio.
+        // Carregamos os dados aqui uma vez para fazer a busca de forma rápida, sem acessar a internet toda hora.
         let equipmentData = [];
 
-        // --- LÓGICA DE CARREGAMENTO DOS RESUMOS (Tabela Principal) ---
+
+        // ===================================================================================
+        // BLOCO 2: FUNÇÕES DE CARREGAMENTO DE DADOS (SUMÁRIOS E TOTAIS)
+        // ===================================================================================
+
+        /**
+         * Busca os dados de resumo de UMA secretaria específica.
+         * @param {string} secretaria - O nome curto da secretaria (ex: 'sedes').
+         * @param {string} url - A URL da planilha de dados da secretaria.
+         * @returns {object} - Um objeto com as contagens de equipamentos.
+         */
         async function fetchSummaryData(secretaria, url) {
             try {
+                // O `await` pausa a função até que a promessa do `fetch` seja resolvida (dados cheguem).
+                // Adicionamos `&t=${new Date().getTime()}` para criar uma URL única e evitar que o navegador use dados antigos (cache).
                 const response = await fetch(`${url}&t=${new Date().getTime()}`);
+                // Pega o conteúdo da resposta como texto (formato CSV).
                 const csvText = await response.text();
+                // Converte o texto CSV em um array de linhas, e cada linha em um array de colunas.
                 const rows = csvText.trim().split(/\r?\n/).map(row => row.split(','));
-                const desktop = parseInt(rows[1][9]) || 0;
-                const notebook = parseInt(rows[1][10]) || 0;
-                const monitor = parseInt(rows[1][11]) || 0;
-                const total = desktop + notebook;
+
+                // Pega os valores de células específicas. `parseInt` converte o texto para número. `|| 0` garante que se o valor for inválido, ele se torna 0.
+                const desktop = parseInt(rows[1][9]) || 0;  // Linha 2, Coluna J
+                const notebook = parseInt(rows[1][10]) || 0; // Linha 2, Coluna K
+                const monitor = parseInt(rows[1][11]) || 0;  // Linha 2, Coluna L
+                const total = desktop + notebook; // Soma total de computadores
+
+                // Atualiza a tabela HTML com os valores encontrados.
                 document.getElementById(`${secretaria}-desktop`).textContent = desktop;
                 document.getElementById(`${secretaria}-notebook`).textContent = notebook;
                 document.getElementById(`${secretaria}-monitor`).textContent = monitor;
                 document.getElementById(`${secretaria}-total`).textContent = total;
+
+                // Retorna os dados para serem usados na soma total.
                 return { desktop, notebook, monitor, total };
+            
             } catch (error) {
+                // Se qualquer parte do `try` falhar (ex: rede offline, URL errada), este bloco é executado.
                 console.error(`Erro ao carregar dados da ${secretaria.toUpperCase()}:`, error);
+                // Informa o usuário na tabela que houve um erro.
                 document.getElementById(`${secretaria}-desktop`).textContent = 'Erro';
                 document.getElementById(`${secretaria}-notebook`).textContent = 'Erro';
                 document.getElementById(`${secretaria}-monitor`).textContent = 'Erro';
                 document.getElementById(`${secretaria}-total`).textContent = 'Erro';
+                // Retorna 0 para não quebrar a soma total.
                 return { desktop: 0, notebook: 0, monitor: 0, total: 0 };
             }
         }
 
+        /**
+         * Orquestra o carregamento de TODAS as planilhas de resumo em paralelo.
+         */
         async function loadAllSummaries() {
+            // Cria um array de promessas. Cada `fetchSummaryData` é uma promessa que buscará os dados de uma secretaria.
             const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSummaryData(name, url));
+            
+            // `Promise.all` espera que TODAS as promessas no array sejam resolvidas. Isso é muito mais rápido
+            // do que carregar uma secretaria depois da outra.
             const results = await Promise.all(promises);
+            
+            // Variáveis para calcular os totais gerais.
             let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
+            
+            // Itera sobre os resultados de cada secretaria e soma os valores.
             results.forEach(result => {
                 totalDesktop += result.desktop;
                 totalNotebook += result.notebook;
                 totalMonitor += result.monitor;
                 grandTotal += result.total;
             });
+            
+            // Atualiza o rodapé da tabela (tfoot) com os totais calculados.
             document.getElementById('total-desktop').textContent = totalDesktop;
             document.getElementById('total-notebook').textContent = totalNotebook;
             document.getElementById('total-monitor').textContent = totalMonitor;
             document.getElementById('grand-total').textContent = grandTotal;
         }
 
-        // --- LÓGICA DE BUSCA DE PATRIMÔNIO INDIVIDUAL ---
+
+        // ===================================================================================
+        // BLOCO 3: FUNÇÕES DE BUSCA DE PATRIMÔNIO
+        // ===================================================================================
+
+        /**
+         * Carrega os dados da planilha de patrimônio para a variável `equipmentData` para busca local.
+         */
         async function loadPatrimonioData() {
+            // Feedback visual para o usuário de que algo está acontecendo.
             searchButton.textContent = 'Carregando...';
             searchButton.disabled = true;
+
             try {
+                // Busca os dados da planilha de patrimônio.
                 const response = await fetch(`${patrimonioSheetUrl}&t=${new Date().getTime()}`);
                 const csvText = await response.text();
                 const rows = csvText.trim().split(/\r?\n/);
-                const headers = ['PATRIMÔNIO', 'EQUIPAMENTO', 'SECRETARIA']; // Definição manual
+                
+                // Como esta planilha não tem cabeçalho, definimos os nomes das colunas manualmente.
+                const headers = ['PATRIMÔNIO', 'EQUIPAMENTO', 'SECRETARIA'];
+                
+                // Converte cada linha do CSV em um objeto JavaScript.
                 equipmentData = rows.map(row => {
                     const values = row.split(',');
                     let obj = {};
+                    // Para cada coluna, cria uma propriedade no objeto (ex: obj['PATRIMÔNIO'] = '12345').
                     headers.forEach((header, index) => {
                         obj[header] = values[index] ? values[index].trim() : '';
                     });
                     return obj;
                 });
                 console.log(`Dados de patrimônio carregados: ${equipmentData.length} itens.`);
+
             } catch (error) {
+                // Se falhar, exibe um erro no console e um alerta para o usuário.
                 console.error("Falha ao carregar dados de patrimônio:", error);
-                alert("Não foi possível carregar os dados para a pesquisa.");
+                alert("Não foi possível carregar os dados para a pesquisa. Verifique o link e se a planilha está publicada.");
+            
             } finally {
+                // O bloco `finally` SEMPRE é executado, com ou sem erro.
+                // Isso garante que o botão de pesquisa volte ao normal.
                 searchButton.textContent = 'Pesquisar Equipamento';
                 searchButton.disabled = false;
             }
         }
 
+        /**
+         * Realiza a busca pelo patrimônio digitado pelo usuário nos dados já carregados.
+         */
         function performSearch() {
+            // Pega o valor do input e remove espaços em branco extras.
             const query = patrimonioInput.value.trim();
+            
+            // Validação simples para ver se algo foi digitado.
             if (!query) {
                 popupTitle.textContent = "Atenção!";
                 popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>';
                 popup.style.display = "flex";
-                return;
+                return; // Encerra a função aqui.
             }
+            
+            // Usa o método `find` para procurar no array `equipmentData` o primeiro item
+            // que satisfaz a condição (o patrimônio ser igual à busca).
             const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
+            
+            // Se um resultado for encontrado...
             if (result) {
+                // Preenche o pop-up com as informações do equipamento.
                 popupTitle.textContent = "Equipamento Encontrado!";
                 popupMessage.innerHTML = `<p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO'] || 'Não informado'}</p><p><strong>Equipamento:</strong> ${result['EQUIPAMENTO'] || 'Não informado'}</p><p><strong>Secretaria:</strong> ${result['SECRETARIA'] || 'Não informada'}</p>`;
             } else {
+                // Caso contrário, informa que não encontrou.
                 popupTitle.textContent = "Não Encontrado";
                 popupMessage.innerHTML = `<p class="not-found">Nenhum equipamento encontrado com o patrimônio <strong>${query}</strong>.</p>`;
             }
+            
+            // Exibe o pop-up.
             popup.style.display = "flex";
         }
 
-        // --- NOVA LÓGICA: DETALHES DA SECRETARIA AO CLICAR NA LINHA ---
+
+        // ===================================================================================
+        // BLOCO 4: FUNÇÕES DE INTERATIVIDADE DA TABELA (CLIQUE NA LINHA)
+        // ===================================================================================
 
         /**
-         * Manipulador de clique para as linhas da tabela de secretarias.
-         * Aciona a busca e exibição dos detalhes da secretaria clicada.
+         * Busca os dados detalhados de uma secretaria e exibe em um popup.
+         * @param {string} secretaria - O nome da secretaria (ex: 'sedes').
+         * @param {string} url - A URL da planilha de dados da secretaria.
          */
-        async function handleSecretariaClick(event) {
-            const row = event.currentTarget;
-            const secretariaCode = row.dataset.secretaria;
-            const secretariaName = row.cells[0].textContent; // Pega o nome da secretaria (ex: "SEDES")
-
-            // 1. Mostrar pop-up com estado de carregamento
-            popupTitle.textContent = `Carregando Detalhes: ${secretariaName}`;
-            popupMessage.innerHTML = '<p style="text-align:center; font-size: 18px;">Buscando dados...</p>';
+        async function showSecretaryDetails(secretaria, url) {
+            // Configura o pop-up para o estado de "carregando".
+            popupTitle.textContent = `Equipamentos em ${secretaria.toUpperCase()}`;
+            popupMessage.innerHTML = '<p>Carregando detalhes...</p>';
             popup.style.display = 'flex';
 
-            // 2. Buscar dados detalhados
-            const url = summaryLinks[secretariaCode];
-            await loadSecretariaDetails(url, secretariaName);
-        }
-
-        /**
-         * Busca os dados CSV de uma secretaria específica e formata em uma tabela HTML para o pop-up.
-         * @param {string} url - A URL da planilha CSV da secretaria.
-         * @param {string} secretariaName - O nome de exibição da secretaria.
-         */
-        async function loadSecretariaDetails(url, secretariaName) {
             try {
+                // Busca os dados da planilha da secretaria específica.
                 const response = await fetch(`${url}&t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error(`Falha na rede: ${response.statusText}`);
+                if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
                 const csvText = await response.text();
                 
-                const rows = csvText.trim().split(/\r?\n/).map(row => row.split(',').map(cell => cell.trim()));
+                // Converte o CSV em linhas e remove a primeira linha (cabeçalho) com `.slice(1)`.
+                const rows = csvText.trim().split(/\r?\n/).slice(1);
 
-                if (rows.length < 2) {
-                    popupMessage.innerHTML = '<p class="not-found">Não há dados detalhados para exibir.</p>';
+                // Verifica se há dados para exibir.
+                if (rows.length === 0 || (rows.length === 1 && rows[0] === '')) {
+                    popupMessage.innerHTML = '<p class="not-found">Nenhum equipamento listado para esta secretaria.</p>';
                     return;
                 }
 
-                // 3. Gerar a tabela HTML com os dados
-                // Assumindo que a primeira linha (rows[0]) é o cabeçalho
-                let tableHtml = '<table class="popup-detail-table">';
+                // Inicia a criação de uma string que conterá o HTML da tabela de detalhes.
+                // A tabela agora terá apenas 2 colunas: Patrimônio e Equipamento.
+                let tableHtml = '<div class="popup-table-container"><table class="popup-table"><thead><tr><th>Patrimônio</th><th>Equipamento</th></tr></thead><tbody>';
                 
-                // Cabeçalho da tabela de detalhes
-                tableHtml += '<thead><tr>';
-                rows[0].forEach(header => {
-                    tableHtml += `<th>${header}</th>`;
+                // Itera sobre cada linha de dados.
+                rows.forEach(row => {
+                    const cols = row.split(',');
+                    const patrimonio = cols[0] || '';    // Pega o valor da Coluna A.
+                    const equipamento = cols[1] || ''; // Pega o valor da Coluna B.
+                    
+                    // Adiciona uma linha `<tr>` na tabela com as duas colunas.
+                    tableHtml += `<tr><td>${patrimonio}</td><td>${equipamento}</td></tr>`;
                 });
-                tableHtml += '</tr></thead>';
+                // Fecha as tags da tabela.
+                tableHtml += '</tbody></table></div>';
 
-                // Corpo da tabela de detalhes
-                tableHtml += '<tbody>';
-                for (let i = 1; i < rows.length; i++) {
-                    tableHtml += '<tr>';
-                    rows[i].forEach(cell => {
-                        tableHtml += `<td>${cell || ''}</td>`;
-                    });
-                    tableHtml += '</tr>';
-                }
-                tableHtml += '</tbody></table>';
-
-                // 4. Atualizar o pop-up com a tabela gerada
-                popupTitle.textContent = `Equipamentos da Secretaria: ${secretariaName}`;
+                // Insere a tabela HTML pronta dentro do pop-up.
                 popupMessage.innerHTML = tableHtml;
 
             } catch (error) {
-                console.error(`Erro ao carregar detalhes da ${secretariaName}:`, error);
-                popupTitle.textContent = "Erro ao Carregar";
-                popupMessage.innerHTML = `<p class="not-found">Não foi possível carregar os detalhes da secretaria ${secretariaName}.<br>Verifique a conexão ou a fonte de dados.</p>`;
+                // Em caso de erro, exibe uma mensagem amigável.
+                console.error(`Erro ao buscar detalhes da ${secretaria.toUpperCase()}:`, error);
+                popupMessage.innerHTML = `<p class="not-found">Não foi possível carregar os detalhes. Tente novamente mais tarde.</p>`;
             }
         }
 
-        // --- INICIALIZAÇÃO E EVENT LISTENERS ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Event Listeners da Busca
-            searchButton.addEventListener('click', performSearch);
-            patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
+        /**
+         * Adiciona os "escutadores de eventos" de clique para cada linha da tabela de secretarias.
+         */
+        function setupRowClickListeners() {
+            // Seleciona todas as linhas que têm a classe 'secretary-row'.
+            const rows = document.querySelectorAll('.secretary-row');
             
-            // Event Listeners do Pop-up
-            closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
-            popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
-
-            // --- NOVO: Adicionar listeners de clique nas linhas da tabela ---
-            document.querySelectorAll('.data-table tbody tr[data-secretaria]').forEach(row => {
-                row.addEventListener('click', handleSecretariaClick);
+            // Para cada linha encontrada...
+            rows.forEach(row => {
+                // ...adiciona um evento que dispara uma função quando a linha é clicada.
+                row.addEventListener('click', () => {
+                    // Pega o nome da secretaria do atributo 'data-secretaria' que definimos no HTML.
+                    const secretaria = row.dataset.secretaria;
+                    
+                    // Se o nome e o link da secretaria existirem...
+                    if (secretaria && summaryLinks[secretaria]) {
+                        // ...chama a função para mostrar os detalhes, passando o nome e a URL correta.
+                        showSecretaryDetails(secretaria, summaryLinks[secretaria]);
+                    }
+                });
             });
+        }
 
-            // Carregar dados iniciais
-            loadAllSummaries();
-            loadPatrimonioData();
-        });
+
+        // ===================================================================================
+        // BLOCO 5: INICIALIZAÇÃO E EVENTOS PRINCIPAIS
+        // ===================================================================================
+
+        // Adiciona o evento de clique ao botão de pesquisa para chamar a função `performSearch`.
+        searchButton.addEventListener('click', performSearch);
+        
+        // Adiciona um evento ao campo de input que detecta quando uma tecla é pressionada.
+        // Se a tecla for 'Enter', ele também chama a função `performSearch`.
+        patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
+        
+        // Adiciona o evento de clique ao botão 'X' do pop-up para escondê-lo.
+        closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
+        
+        // Adiciona um evento de clique à área escura (overlay) do pop-up.
+        // Se o clique for no overlay (e não no conteúdo do pop-up), ele também fecha.
+        popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
+        
+        // ---- INICIALIZAÇÃO DA PÁGINA ----
+        // Estas funções são chamadas assim que a página termina de carregar o script.
+        
+        loadAllSummaries();      // Carrega os resumos e preenche a tabela principal.
+        loadPatrimonioData();    // Carrega os dados de patrimônio em segundo plano para a busca.
+        setupRowClickListeners(); // Ativa a funcionalidade de clique nas linhas da tabela.
+
     </script>
 </body>
 </html>
