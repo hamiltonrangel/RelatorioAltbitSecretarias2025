@@ -7,10 +7,51 @@
     <title>Consulta de Patrimônio</title>
 
     <style>
-        /* O CSS continua o mesmo */
-        body{margin:0;font-family:Arial,sans-serif;background-color:#f4f4f4;min-height:100vh}img{max-width:100%;display:block}.main-content{padding:40px 20px}.data-table{width:90%;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 10px rgba(0,0,0,.1);font-size:14px;color:#333}.data-table th,.data-table td{border:1px solid #dee2e6;padding:12px 15px;text-align:center}.data-table thead th{background-color:#343a40;color:#fff;text-transform:uppercase;letter-spacing:.5px}.data-table thead tr:last-child th{background-color:#495057}.data-table tbody tr{background-color:#fff}.data-table tbody tr:nth-child(even){background-color:#f8f9fa}.data-table tbody tr:hover{background-color:#e9ecef}.data-table tbody td:first-child{font-weight:700;text-align:left;color:#0056b3}.data-table tfoot{font-weight:700}.data-table tfoot tr{background-color:#dee2e6}.grand-total{background-color:#0056b3;color:#fff;font-size:1.2em}.search-container{text-align:center;padding:30px 20px;background-color:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,.05)}.search-container input[type=text]{padding:12px 15px;width:300px;border:1px solid #ced4da;border-radius:5px;font-size:16px;margin-right:10px;outline:0;transition:border-color .3s ease}.search-container input[type=text]:focus{border-color:#007bff}.search-container button{padding:12px 25px;background-color:#007bff;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;transition:background-color .3s ease}.search-container button:hover{background-color:#0056b3}
-        .search-container button:disabled{background-color:#6c757d;cursor:not-allowed;}
-        .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:1000}.popup-content{background-color:#fff;padding:30px;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.3);width:450px;max-width:90%;text-align:left;position:relative;animation:fadeIn .3s ease-out}@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.popup-content h3{margin-top:0;color:#333;font-size:24px;margin-bottom:20px;text-align:center}.popup-content p{color:#555;font-size:16px;line-height:1.8;margin-bottom:10px}.popup-content .not-found{text-align:center;font-weight:700;font-size:18px}.popup-close-btn{position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#aaa;background:0 0;border:none;line-height:1;transition:color .2s ease}.popup-close-btn:hover{color:#333}
+        /* CSS Básico */
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; min-height: 100vh; }
+        img { max-width: 100%; display: block; }
+        .main-content { padding: 40px 20px; }
+
+        /* Estilos da Tabela Principal */
+        .data-table { width: 90%; margin: 20px auto; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0, 0, 0, .1); font-size: 14px; color: #333; }
+        .data-table th, .data-table td { border: 1px solid #dee2e6; padding: 12px 15px; text-align: center; }
+        .data-table thead th { background-color: #343a40; color: #fff; text-transform: uppercase; letter-spacing: .5px; }
+        .data-table thead tr:last-child th { background-color: #495057; }
+        .data-table tbody tr { background-color: #fff; transition: background-color 0.2s ease; }
+        .data-table tbody tr:nth-child(even) { background-color: #f8f9fa; }
+        
+        /* --- NOVO: Estilo para linhas clicáveis --- */
+        .data-table tbody tr[data-secretaria] { cursor: pointer; }
+        .data-table tbody tr[data-secretaria]:hover { background-color: #e0eafc; } /* Cor de hover mais pronunciada */
+
+        .data-table tbody td:first-child { font-weight: 700; text-align: left; color: #0056b3; }
+        .data-table tfoot { font-weight: 700; }
+        .data-table tfoot tr { background-color: #dee2e6; }
+        .grand-total { background-color: #0056b3; color: #fff; font-size: 1.2em; }
+
+        /* Container de Busca */
+        .search-container { text-align: center; padding: 30px 20px; background-color: #fff; border-bottom: 1px solid #eee; box-shadow: 0 2px 5px rgba(0, 0, 0, .05); }
+        .search-container input[type=text] { padding: 12px 15px; width: 300px; border: 1px solid #ced4da; border-radius: 5px; font-size: 16px; margin-right: 10px; outline: 0; transition: border-color .3s ease; }
+        .search-container input[type=text]:focus { border-color: #007bff; }
+        .search-container button { padding: 12px 25px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color .3s ease; }
+        .search-container button:hover { background-color: #0056b3; }
+        .search-container button:disabled { background-color: #6c757d; cursor: not-allowed; }
+
+        /* Pop-up */
+        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, .6); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; padding: 20px 0; }
+        .popup-content { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, .3); width: 90%; max-width: 800px; /* Aumentei a largura máxima para comportar a tabela de detalhes */ text-align: left; position: relative; animation: fadeIn .3s ease-out; margin: auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(.9) } to { opacity: 1; transform: scale(1) } }
+        .popup-content h3 { margin-top: 0; color: #333; font-size: 24px; margin-bottom: 20px; text-align: center; }
+        .popup-content p { color: #555; font-size: 16px; line-height: 1.8; margin-bottom: 10px; }
+        .popup-content .not-found { text-align: center; font-weight: 700; font-size: 18px; }
+        .popup-close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #aaa; background: 0 0; border: none; line-height: 1; transition: color .2s ease; }
+        .popup-close-btn:hover { color: #333; }
+
+        /* --- NOVO: Estilo para a tabela de detalhes dentro do pop-up --- */
+        .popup-detail-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; max-height: 60vh; overflow-y: auto; display: block; }
+        .popup-detail-table th, .popup-detail-table td { border: 1px solid #ddd; padding: 8px; text-align: left; word-break: break-word; }
+        .popup-detail-table th { background-color: #f2f2f2; font-weight: bold; }
+        .popup-detail-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
     </style>
 </head>
 
@@ -20,18 +61,55 @@
         <input type="text" id="patrimonioInput" placeholder="Digite o número de patrimônio...">
         <button id="searchButton">Pesquisar Equipamento</button>
     </div>
-    <main class="main-content"><table class="data-table"><thead><tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr><tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr></thead><tbody><tr><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr><tr><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr><tr><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr><tr><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr><tr><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr><tr><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr><tr><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr><tr><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr><tr><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr><tr><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr><tr><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr><tr><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr><tr><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr><tr><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr><tr><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr><tr><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr><tr><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr></tbody><tfoot><tr><td>TOTALIZAÇÃO</td><td id="total-desktop">...</td><td id="total-notebook">...</td><td id="total-monitor">...</td><td id="grand-total" class="grand-total">...</td></tr></tfoot></table></main>
+    <main class="main-content">
+        <table class="data-table">
+            <thead>
+                <tr><th rowspan="2">Secretarias</th><th colspan="3">INSTALADOS</th><th rowspan="2">TOTAL<br>INSTALADOS</th></tr>
+                <tr><th>DESKTOP - MINIPC</th><th>NOTEBOOK</th><th>MONITOR</th></tr>
+            </thead>
+            <tbody>
+                <tr data-secretaria="sedes"><td>SEDES</td><td id="sedes-desktop">...</td><td id="sedes-notebook">...</td><td id="sedes-monitor">...</td><td id="sedes-total">...</td></tr>
+                <tr data-secretaria="sesau"><td>SESAU</td><td id="sesau-desktop">...</td><td id="sesau-notebook">...</td><td id="sesau-monitor">...</td><td id="sesau-total">...</td></tr>
+                <tr data-secretaria="sefaz"><td>SEFAZ</td><td id="sefaz-desktop">...</td><td id="sefaz-notebook">...</td><td id="sefaz-monitor">...</td><td id="sefaz-total">...</td></tr>
+                <tr data-secretaria="seduc"><td>SEDUC</td><td id="seduc-desktop">...</td><td id="seduc-notebook">...</td><td id="seduc-monitor">...</td><td id="seduc-total">...</td></tr>
+                <tr data-secretaria="seo"><td>SEO</td><td id="seo-desktop">...</td><td id="seo-notebook">...</td><td id="seo-monitor">...</td><td id="seo-total">...</td></tr>
+                <tr data-secretaria="sajur"><td>SAJUR</td><td id="sajur-desktop">...</td><td id="sajur-notebook">...</td><td id="sajur-monitor">...</td><td id="sajur-total">...</td></tr>
+                <tr data-secretaria="secad"><td>SECAD</td><td id="secad-desktop">...</td><td id="secad-notebook">...</td><td id="secad-monitor">...</td><td id="secad-total">...</td></tr>
+                <tr data-secretaria="segur"><td>SEGUR</td><td id="segur-desktop">...</td><td id="segur-notebook">...</td><td id="segur-monitor">...</td><td id="segur-total">...</td></tr>
+                <tr data-secretaria="setur"><td>SETUR</td><td id="setur-desktop">...</td><td id="setur-notebook">...</td><td id="setur-monitor">...</td><td id="setur-total">...</td></tr>
+                <tr data-secretaria="sesep"><td>SESEP</td><td id="sesep-desktop">...</td><td id="sesep-notebook">...</td><td id="sesep-monitor">...</td><td id="sesep-total">...</td></tr>
+                <tr data-secretaria="semam"><td>SEMAM</td><td id="semam-desktop">...</td><td id="semam-notebook">...</td><td id="semam-monitor">...</td><td id="semam-total">...</td></tr>
+                <tr data-secretaria="seurb"><td>SEURB</td><td id="seurb-desktop">...</td><td id="seurb-notebook">...</td><td id="seurb-monitor">...</td><td id="seurb-total">...</td></tr>
+                <tr data-secretaria="sepedi"><td>SEPEDI</td><td id="sepedi-desktop">...</td><td id="sepedi-notebook">...</td><td id="sepedi-monitor">...</td><td id="sepedi-total">...</td></tr>
+                <tr data-secretaria="seesp"><td>SEESP</td><td id="seesp-desktop">...</td><td id="seesp-notebook">...</td><td id="seesp-monitor">...</td><td id="seesp-total">...</td></tr>
+                <tr data-secretaria="segov"><td>SEGOV</td><td id="segov-desktop">...</td><td id="segov-notebook">...</td><td id="segov-monitor">...</td><td id="segov-total">...</td></tr>
+                <tr data-secretaria="seplan"><td>SEPLAN</td><td id="seplan-desktop">...</td><td id="seplan-notebook">...</td><td id="seplan-monitor">...</td><td id="seplan-total">...</td></tr>
+                <tr data-secretaria="sehab"><td>SEHAB</td><td id="sehab-desktop">...</td><td id="sehab-notebook">...</td><td id="sehab-monitor">...</td><td id="sehab-total">...</td></tr>
+            </tbody>
+            <tfoot>
+                <tr><td>TOTALIZAÇÃO</td><td id="total-desktop">...</td><td id="total-notebook">...</td><td id="total-monitor">...</td><td id="grand-total" class="grand-total">...</td></tr>
+            </tfoot>
+        </table>
+    </main>
     <footer><img src="images/image1.png" alt="Rodapé do site"></footer>
-    <div id="equipmentPopup" class="popup-overlay"><div class="popup-content"><button id="closePopup" class="popup-close-btn">&times;</button><h3 id="popupTitle">Resultado da Pesquisa</h3><div id="popupMessage"></div></div></div>
+    <div id="equipmentPopup" class="popup-overlay">
+        <div class="popup-content">
+            <button id="closePopup" class="popup-close-btn">&times;</button>
+            <h3 id="popupTitle">Resultado da Pesquisa</h3>
+            <div id="popupMessage"></div>
+        </div>
+    </div>
 
     <script>
+        // --- Elementos do DOM ---
         const searchButton = document.getElementById('searchButton');
         const patrimonioInput = document.getElementById('patrimonioInput');
         const popup = document.getElementById('equipmentPopup');
         const closePopupButton = document.getElementById('closePopup');
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
-        
+
+        // --- URLs das Planilhas ---
         const patrimonioSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH9ePSeiIsuJSZytuGb1TU3yLr0GRY727Z0JgqUYCMWjzJthzdXFVpiRLp7F5FsVNCFLZ1AEdozbCI/pub?output=csv';
 
         const summaryLinks = {
@@ -40,20 +118,48 @@
 
         let equipmentData = [];
 
+        // --- LÓGICA DE CARREGAMENTO DOS RESUMOS (Tabela Principal) ---
         async function fetchSummaryData(secretaria, url) {
-            try { const response = await fetch(`${url}&t=${new Date().getTime()}`); const csvText = await response.text(); const rows = csvText.trim().split(/\r?\n/).map(row => row.split(',')); const desktop = parseInt(rows[1][9]) || 0; const notebook = parseInt(rows[1][10]) || 0; const monitor = parseInt(rows[1][11]) || 0; const total = desktop + notebook; document.getElementById(`${secretaria}-desktop`).textContent = desktop; document.getElementById(`${secretaria}-notebook`).textContent = notebook; document.getElementById(`${secretaria}-monitor`).textContent = monitor; document.getElementById(`${secretaria}-total`).textContent = total; return { desktop, notebook, monitor, total };
-            } catch (error) { console.error(`Erro ao carregar dados da ${secretaria.toUpperCase()}:`, error); document.getElementById(`${secretaria}-desktop`).textContent = 'Erro'; document.getElementById(`${secretaria}-notebook`).textContent = 'Erro'; document.getElementById(`${secretaria}-monitor`).textContent = 'Erro'; document.getElementById(`${secretaria}-total`).textContent = 'Erro'; return { desktop: 0, notebook: 0, monitor: 0, total: 0 }; }
+            try {
+                const response = await fetch(`${url}&t=${new Date().getTime()}`);
+                const csvText = await response.text();
+                const rows = csvText.trim().split(/\r?\n/).map(row => row.split(','));
+                const desktop = parseInt(rows[1][9]) || 0;
+                const notebook = parseInt(rows[1][10]) || 0;
+                const monitor = parseInt(rows[1][11]) || 0;
+                const total = desktop + notebook;
+                document.getElementById(`${secretaria}-desktop`).textContent = desktop;
+                document.getElementById(`${secretaria}-notebook`).textContent = notebook;
+                document.getElementById(`${secretaria}-monitor`).textContent = monitor;
+                document.getElementById(`${secretaria}-total`).textContent = total;
+                return { desktop, notebook, monitor, total };
+            } catch (error) {
+                console.error(`Erro ao carregar dados da ${secretaria.toUpperCase()}:`, error);
+                document.getElementById(`${secretaria}-desktop`).textContent = 'Erro';
+                document.getElementById(`${secretaria}-notebook`).textContent = 'Erro';
+                document.getElementById(`${secretaria}-monitor`).textContent = 'Erro';
+                document.getElementById(`${secretaria}-total`).textContent = 'Erro';
+                return { desktop: 0, notebook: 0, monitor: 0, total: 0 };
+            }
         }
 
         async function loadAllSummaries() {
             const promises = Object.entries(summaryLinks).map(([name, url]) => fetchSummaryData(name, url));
             const results = await Promise.all(promises);
             let totalDesktop = 0, totalNotebook = 0, totalMonitor = 0, grandTotal = 0;
-            results.forEach(result => { totalDesktop += result.desktop; totalNotebook += result.notebook; totalMonitor += result.monitor; grandTotal += result.total; });
-            document.getElementById('total-desktop').textContent = totalDesktop; document.getElementById('total-notebook').textContent = totalNotebook; document.getElementById('total-monitor').textContent = totalMonitor; document.getElementById('grand-total').textContent = grandTotal;
+            results.forEach(result => {
+                totalDesktop += result.desktop;
+                totalNotebook += result.notebook;
+                totalMonitor += result.monitor;
+                grandTotal += result.total;
+            });
+            document.getElementById('total-desktop').textContent = totalDesktop;
+            document.getElementById('total-notebook').textContent = totalNotebook;
+            document.getElementById('total-monitor').textContent = totalMonitor;
+            document.getElementById('grand-total').textContent = grandTotal;
         }
 
-        // ===== FUNÇÃO DE BUSCA CORRIGIDA (PARA PLANILHA SEM CABEÇALHO) =====
+        // --- LÓGICA DE BUSCA DE PATRIMÔNIO INDIVIDUAL ---
         async function loadPatrimonioData() {
             searchButton.textContent = 'Carregando...';
             searchButton.disabled = true;
@@ -61,27 +167,19 @@
                 const response = await fetch(`${patrimonioSheetUrl}&t=${new Date().getTime()}`);
                 const csvText = await response.text();
                 const rows = csvText.trim().split(/\r?\n/);
-
-                // Como não há cabeçalho, definimos os nomes das colunas manualmente
-                const headers = ['PATRIMÔNIO', 'EQUIPAMENTO', 'SECRETARIA'];
-                
-                // Agora, processamos TODAS as linhas da planilha como se fossem dados
+                const headers = ['PATRIMÔNIO', 'EQUIPAMENTO', 'SECRETARIA']; // Definição manual
                 equipmentData = rows.map(row => {
                     const values = row.split(',');
                     let obj = {};
-                    // Usamos nossos headers manuais para criar o objeto
                     headers.forEach((header, index) => {
                         obj[header] = values[index] ? values[index].trim() : '';
                     });
                     return obj;
                 });
-                
                 console.log(`Dados de patrimônio carregados: ${equipmentData.length} itens.`);
-                if (equipmentData.length > 0) { console.log("Exemplo de item para busca:", equipmentData[0]); }
-
             } catch (error) {
                 console.error("Falha ao carregar dados de patrimônio:", error);
-                alert("Não foi possível carregar os dados para a pesquisa. Verifique o link e se a planilha está publicada.");
+                alert("Não foi possível carregar os dados para a pesquisa.");
             } finally {
                 searchButton.textContent = 'Pesquisar Equipamento';
                 searchButton.disabled = false;
@@ -90,10 +188,13 @@
 
         function performSearch() {
             const query = patrimonioInput.value.trim();
-            if (!query) { popupTitle.textContent = "Atenção!"; popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>'; popup.style.display = "flex"; return; }
-            
+            if (!query) {
+                popupTitle.textContent = "Atenção!";
+                popupMessage.innerHTML = '<p class="not-found">Por favor, digite um número de patrimônio.</p>';
+                popup.style.display = "flex";
+                return;
+            }
             const result = equipmentData.find(item => item['PATRIMÔNIO'] === query);
-            
             if (result) {
                 popupTitle.textContent = "Equipamento Encontrado!";
                 popupMessage.innerHTML = `<p><strong>Patrimônio:</strong> ${result['PATRIMÔNIO'] || 'Não informado'}</p><p><strong>Equipamento:</strong> ${result['EQUIPAMENTO'] || 'Não informado'}</p><p><strong>Secretaria:</strong> ${result['SECRETARIA'] || 'Não informada'}</p>`;
@@ -103,15 +204,98 @@
             }
             popup.style.display = "flex";
         }
-        
-        searchButton.addEventListener('click', performSearch);
-        patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
-        closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
-        popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
-        
-        loadAllSummaries();
-        loadPatrimonioData();
 
+        // --- NOVA LÓGICA: DETALHES DA SECRETARIA AO CLICAR NA LINHA ---
+
+        /**
+         * Manipulador de clique para as linhas da tabela de secretarias.
+         * Aciona a busca e exibição dos detalhes da secretaria clicada.
+         */
+        async function handleSecretariaClick(event) {
+            const row = event.currentTarget;
+            const secretariaCode = row.dataset.secretaria;
+            const secretariaName = row.cells[0].textContent; // Pega o nome da secretaria (ex: "SEDES")
+
+            // 1. Mostrar pop-up com estado de carregamento
+            popupTitle.textContent = `Carregando Detalhes: ${secretariaName}`;
+            popupMessage.innerHTML = '<p style="text-align:center; font-size: 18px;">Buscando dados...</p>';
+            popup.style.display = 'flex';
+
+            // 2. Buscar dados detalhados
+            const url = summaryLinks[secretariaCode];
+            await loadSecretariaDetails(url, secretariaName);
+        }
+
+        /**
+         * Busca os dados CSV de uma secretaria específica e formata em uma tabela HTML para o pop-up.
+         * @param {string} url - A URL da planilha CSV da secretaria.
+         * @param {string} secretariaName - O nome de exibição da secretaria.
+         */
+        async function loadSecretariaDetails(url, secretariaName) {
+            try {
+                const response = await fetch(`${url}&t=${new Date().getTime()}`);
+                if (!response.ok) throw new Error(`Falha na rede: ${response.statusText}`);
+                const csvText = await response.text();
+                
+                const rows = csvText.trim().split(/\r?\n/).map(row => row.split(',').map(cell => cell.trim()));
+
+                if (rows.length < 2) {
+                    popupMessage.innerHTML = '<p class="not-found">Não há dados detalhados para exibir.</p>';
+                    return;
+                }
+
+                // 3. Gerar a tabela HTML com os dados
+                // Assumindo que a primeira linha (rows[0]) é o cabeçalho
+                let tableHtml = '<table class="popup-detail-table">';
+                
+                // Cabeçalho da tabela de detalhes
+                tableHtml += '<thead><tr>';
+                rows[0].forEach(header => {
+                    tableHtml += `<th>${header}</th>`;
+                });
+                tableHtml += '</tr></thead>';
+
+                // Corpo da tabela de detalhes
+                tableHtml += '<tbody>';
+                for (let i = 1; i < rows.length; i++) {
+                    tableHtml += '<tr>';
+                    rows[i].forEach(cell => {
+                        tableHtml += `<td>${cell || ''}</td>`;
+                    });
+                    tableHtml += '</tr>';
+                }
+                tableHtml += '</tbody></table>';
+
+                // 4. Atualizar o pop-up com a tabela gerada
+                popupTitle.textContent = `Equipamentos da Secretaria: ${secretariaName}`;
+                popupMessage.innerHTML = tableHtml;
+
+            } catch (error) {
+                console.error(`Erro ao carregar detalhes da ${secretariaName}:`, error);
+                popupTitle.textContent = "Erro ao Carregar";
+                popupMessage.innerHTML = `<p class="not-found">Não foi possível carregar os detalhes da secretaria ${secretariaName}.<br>Verifique a conexão ou a fonte de dados.</p>`;
+            }
+        }
+
+        // --- INICIALIZAÇÃO E EVENT LISTENERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Event Listeners da Busca
+            searchButton.addEventListener('click', performSearch);
+            patrimonioInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') performSearch(); });
+            
+            // Event Listeners do Pop-up
+            closePopupButton.addEventListener('click', () => { popup.style.display = 'none'; });
+            popup.addEventListener('click', (event) => { if (event.target === popup) popup.style.display = 'none'; });
+
+            // --- NOVO: Adicionar listeners de clique nas linhas da tabela ---
+            document.querySelectorAll('.data-table tbody tr[data-secretaria]').forEach(row => {
+                row.addEventListener('click', handleSecretariaClick);
+            });
+
+            // Carregar dados iniciais
+            loadAllSummaries();
+            loadPatrimonioData();
+        });
     </script>
 </body>
 </html>
